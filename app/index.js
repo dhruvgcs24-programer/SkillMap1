@@ -1,6 +1,8 @@
-import { View, Image, Animated } from 'react-native'
+import { View, Animated } from 'react-native'
 import { useEffect, useRef } from 'react'
 import { router } from 'expo-router'
+
+import { supabase } from '../src/services/supabase'
 
 export default function SplashScreen() {
   const scale = useRef(new Animated.Value(0.5)).current
@@ -20,10 +22,22 @@ export default function SplashScreen() {
       }),
     ]).start()
 
-    setTimeout(() => {
-      router.replace('/login')
-    }, 2500)
+    checkSession()
   }, [])
+
+  const checkSession = async () => {
+    setTimeout(async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+
+      if (session) {
+        router.replace('/home')
+      } else {
+        router.replace('/login')
+      }
+    }, 2500)
+  }
 
   return (
     <View
