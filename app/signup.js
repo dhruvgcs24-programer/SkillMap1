@@ -56,7 +56,7 @@ export default function SignUpScreen() {
       email,
     })
 
-    router.replace('/home')
+    router.replace("/(tabs)")
   }
 
   return (

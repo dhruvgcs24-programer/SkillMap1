@@ -34,7 +34,7 @@ export default function LoginScreen() {
     if (error) {
       alert(error.message);
     } else {
-      router.replace("/home");
+      router.replace("/(tabs)");
     }
   };
 
@@ -63,7 +63,7 @@ const signInWithGoogle = async () => {
     );
 
   if (result.type === "success") {
-    router.replace("/home");
+    router.replace("/(tabs)");
   }
 };
 

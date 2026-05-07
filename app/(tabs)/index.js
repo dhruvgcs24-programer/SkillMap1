@@ -8,7 +8,7 @@ import {
 
 import { router } from 'expo-router'
 
-import { supabase } from '../src/services/supabase'
+import { supabase } from '../../src/services/supabase'
 
 export default function HomeScreen() {
   const [profile, setProfile] = useState(null)
