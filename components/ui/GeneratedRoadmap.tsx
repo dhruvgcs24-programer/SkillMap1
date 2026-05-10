@@ -270,7 +270,7 @@ function WeeklyView({ roadmap }: { roadmap: Roadmap }) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.weekPicker}
       >
-        {allWeeks.map((week: WeekTopic) => {
+        {allWeeks.map((week) => {
           const color =
             roadmap.phases.find((p) => p.id === `phase-${week.phase}`)?.color || "#6C63FF";
           const isSelected = selectedWeek.id === week.id;

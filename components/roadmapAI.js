@@ -273,26 +273,166 @@ const MOCK_ROADMAP = {
 //
 // Returns: Promise<Roadmap>
 // -------------------------------------------------------------------
+
+// Calculate total weeks from duration string
+function getTotalWeeks(duration) {
+  if (duration.includes("week")) return parseInt(duration) * 1;
+  if (duration.includes("month")) return parseInt(duration) * 4;
+  if (duration.includes("year")) return parseInt(duration) * 52;
+  return 12;
+}
+
+// Build the prompt sent to the AI
+function buildPrompt(formData) {
+  const totalWeeks = getTotalWeeks(formData.duration);
+  const numPhases = totalWeeks <= 4 ? 2 : 3;
+
+  return `You are an expert technical learning coach. Generate a detailed, realistic learning roadmap.
+
+Student details:
+- Topic: ${formData.topic}
+- Duration: ${formData.duration} (${totalWeeks} weeks total)
+- Current level: ${formData.level}
+- Goal: ${formData.goal}
+
+Return ONLY a valid JSON object. No explanation, no markdown, no backticks. Just raw JSON.
+
+The JSON must exactly follow this structure:
+{
+  "title": "<Topic> Mastery",
+  "topic": "${formData.topic}",
+  "duration": "${formData.duration}",
+  "level": "${formData.level}",
+  "goal": "${formData.goal}",
+  "totalWeeks": ${totalWeeks},
+  "xpTotal": ${totalWeeks * 100},
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Phase 1 – <phase name>",
+      "weeks": "<start>–<end>",
+      "color": "#6C63FF",
+      "description": "<2 sentence description>",
+      "topics": [
+        {
+          "id": "week-1",
+          "week": 1,
+          "phase": 1,
+          "title": "<week focus title>",
+          "description": "<1-2 sentence description>",
+          "xp": 100,
+          "tasks": [
+            "<concrete actionable task 1>",
+            "<concrete actionable task 2>",
+            "<concrete actionable task 3>",
+            "<concrete actionable task 4>"
+          ],
+          "resources": [
+            { "title": "<resource name>", "url": "<real url>" },
+            { "title": "<resource name>", "url": "<real url>" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+Rules:
+- Use exactly ${numPhases} phases
+- Distribute ${totalWeeks} weeks evenly across phases
+- Phase colors must be exactly: phase 1 = "#6C63FF", phase 2 = "#FF6584", phase 3 = "#43D9AD"
+- Each week must have exactly 4 tasks — specific, actionable, and measurable
+- Resources must have real, working URLs (official docs, YouTube, etc.)
+- Tasks must be appropriate for a ${formData.level} level learner
+- The roadmap must be goal-oriented toward: ${formData.goal}
+- Week IDs: "week-1", "week-2", etc. (sequential across all phases)
+- Phase IDs: "phase-1", "phase-2", etc.
+- xp for each week = 100
+- Return ONLY the JSON. Nothing else.`;
+}
+
 export async function generateRoadmap(formData) {
-  // Simulate a 2-second AI "thinking" delay
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  const apiKey = process.env.EXPO_PUBLIC_OPENROUTER_API_KEY;
 
-  // 🔁 TO SWAP IN REAL AI LATER:
-  // Replace everything below with a real fetch() call.
-  // The returned object must match the MOCK_ROADMAP shape above.
-  //
-  // const response = await fetch("https://api.anthropic.com/v1/messages", { ... });
-  // const data = await response.json();
-  // return JSON.parse(data.content[0].text);
+  // Safety check — fall back to mock if no key found
+  if (!apiKey) {
+    console.warn("⚠️ No OpenRouter API key found. Using mock data.");
+    await new Promise((r) => setTimeout(r, 2000));
+    return {
+      ...MOCK_ROADMAP,
+      topic: formData.topic || MOCK_ROADMAP.topic,
+      duration: formData.duration || MOCK_ROADMAP.duration,
+      level: formData.level || MOCK_ROADMAP.level,
+      goal: formData.goal || MOCK_ROADMAP.goal,
+      title: `${formData.topic || "React Native"} Mastery`,
+    };
+  }
 
-  return {
-    ...MOCK_ROADMAP,
-    topic: formData.topic || MOCK_ROADMAP.topic,
-    duration: formData.duration || MOCK_ROADMAP.duration,
-    level: formData.level || MOCK_ROADMAP.level,
-    goal: formData.goal || MOCK_ROADMAP.goal,
-    title: `${formData.topic || "React Native"} Mastery`,
-  };
+  try {
+    console.log("🚀 Calling OpenRouter API...");
+    console.log("🔑 API key present:", !!apiKey, "| Key prefix:", apiKey?.slice(0, 12));
+
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://skillmap.app",
+        "X-Title": "SkillMap",
+      },
+      body: JSON.stringify({
+        model: "openrouter/free",
+        messages: [
+          {
+            role: "user",
+            content: buildPrompt(formData),
+          },
+        ],
+        temperature: 0.7,
+        max_tokens: 4000,
+      }),
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`OpenRouter error ${response.status}: ${errText}`);
+    }
+
+    const data = await response.json();
+
+    // Extract the text content from the response
+    const rawText = data.choices?.[0]?.message?.content || "";
+
+    // Strip any accidental markdown fences the model might add
+    const cleaned = rawText
+      .replace(/```json/gi, "")
+      .replace(/```/g, "")
+      .trim();
+
+    const roadmap = JSON.parse(cleaned);
+
+    // Validate the response has the required shape
+    if (!roadmap.phases || !Array.isArray(roadmap.phases)) {
+      throw new Error("Invalid roadmap structure from AI");
+    }
+
+    return roadmap;
+
+  } catch (error) {
+    console.error("❌ AI generation failed:", error.message);
+    console.error("❌ Full error:", JSON.stringify(error, null, 2));
+
+    // Graceful fallback to mock data so the app never crashes
+    console.warn("↩️ Falling back to mock roadmap.");
+    return {
+      ...MOCK_ROADMAP,
+      topic: formData.topic || MOCK_ROADMAP.topic,
+      duration: formData.duration || MOCK_ROADMAP.duration,
+      level: formData.level || MOCK_ROADMAP.level,
+      goal: formData.goal || MOCK_ROADMAP.goal,
+      title: `${formData.topic || "React Native"} Mastery`,
+    };
+  }
 }
 
 // -------------------------------------------------------------------

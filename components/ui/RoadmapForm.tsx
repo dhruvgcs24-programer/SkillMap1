@@ -187,7 +187,7 @@ export default function RoadmapForm({
 
           <Text style={styles.headerTitle}>Build Your{"\n"}Learning Roadmap</Text>
           <Text style={styles.headerSubtitle}>
-            Tell us what you want to master and we&apos;ll plan the perfect path for you.
+            {"Tell us what you want to master and we'll plan the perfect path for you."}
           </Text>
         </View>
 
