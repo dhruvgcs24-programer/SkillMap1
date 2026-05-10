@@ -1,106 +1,131 @@
 # SkillMap 🚀
-**Your personal roadmap to technical mastery.**
+**The ultimate technical learning platform for modern developers.**
 
-SkillMap is a high-performance, visually stunning mobile application built with **React Native** and **Expo**. It provides developers with structured, interactive learning paths (roadmaps) to navigate the complex world of modern technology. Whether you're aspiring to be a Frontend Developer, Backend Engineer, or an AI Specialist, SkillMap guides you through every step with curated resources and progress tracking.
+![SkillMap Hero Mockup](./skillmap_hero_mockup.png)
+
+SkillMap is a premium, high-performance mobile application built with **React Native** and **Expo**. It transforms the daunting task of learning complex technologies into a structured, gamified journey. Featuring an **AI-powered roadmap generator**, **real-time progress tracking**, and a **"Stellar Glass" UI**, SkillMap is designed to help you achieve technical mastery with ease.
 
 ---
 
 ## ✨ Key Features
 
-- 🗺 **Comprehensive Roadmaps**: Role-based (Frontend, Backend, etc.) and Skill-based (Python, JavaScript, etc.) paths designed for all levels.
-- 📈 **Gamified Progress**: Track your learning journey with XP points, daily streaks, and mastery percentages.
-- 📚 **Curated Resources**: Every topic comes with high-quality links to official documentation (MDN, Python.org), video tutorials (freeCodeCamp, Corey Schafer), and interactive courses.
-- 🔐 **Secure Authentication**: Full login and signup system powered by **Supabase**.
-- 🎨 **Premium UI/UX**: A sleek, dark-themed interface featuring glassmorphic elements, smooth gradients, and micro-animations.
-- 💾 **Offline Caching**: Fast performance with local progress persistence using AsyncStorage.
+### 🤖 AI-Powered Roadmaps
+Never wonder "what to learn next" again. Our AI engine generates custom, goal-oriented learning paths based on your topic, time availability, and current skill level.
+- **Custom Duration**: From 1 week to 1 year.
+- **Tailored Level**: Beginner, Intermediate, or Advanced.
+- **Actionable Tasks**: Every week includes specific, measurable tasks and hand-picked resources.
+
+### 🎮 Gamified Experience
+Learning is more effective when it's fun. SkillMap incorporates gaming mechanics to keep you motivated:
+- **Mastery Ring**: A dynamic SVG visualization of your global progress across all topics.
+- **XP System**: Earn experience points for every milestone and task completed.
+- **Daily Streaks**: Maintain your learning momentum with flame-tracked streaks.
+- **Milestones & Trophies**: Unlock unique rewards as you conquer modules.
+
+### 💎 "Stellar Glass" UI/UX
+Experience a premium interface designed for focus and aesthetic pleasure:
+- **Bento Stats Grid**: A sleek overview of your most important metrics.
+- **Glassmorphism**: Elegant translucent elements with subtle border glows.
+- **Micro-animations**: Smooth transitions powered by React Native Reanimated.
+- **Dark Mode First**: Optimized for long-night coding sessions.
+
+### 🔐 Secure & Real-time
+Powered by **Supabase**, SkillMap ensures your data is always synced and secure:
+- **The Vault**: A dedicated area for managing your identity and preferences.
+- **Cloud Sync**: Start learning on one device, continue on another.
+- **Offline First**: Local caching with AsyncStorage ensures performance even without a connection.
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Framework**: [Expo](https://expo.dev/) (React Native)
-- **Routing**: [Expo Router](https://docs.expo.dev/router/introduction/) (File-based navigation)
-- **Backend**: [Supabase](https://supabase.com/) (Authentication & Real-time Database)
-- **UI Components**: [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/), [Expo Linear Gradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/)
-- **Icons**: [Ionicons](https://icons.expo.fyi/Index) (@expo/vector-icons)
+- **Framework**: [Expo](https://expo.dev/) (SDK 54)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **State & Data**: [Supabase](https://supabase.com/) (Auth & DB), [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+- **Animations**: [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)
+- **Styling**: [Expo Linear Gradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/), [React Native SVG](https://github.com/software-mansion/react-native-svg)
+- **Navigation**: [Expo Router](https://docs.expo.dev/router/introduction/) (File-based)
+- **AI Integration**: [OpenRouter API](https://openrouter.ai/) (LLM-agnostic)
 
 ---
 
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
-- [Node.js](https://nodejs.org/) (v18 or later)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Expo Go](https://expo.dev/go) app on your mobile device (optional for physical testing)
+- [Node.js](https://nodejs.org/) (v18+)
+- [Expo Go](https://expo.dev/go) on your mobile device
 
 ### 2. Installation
-Clone the repository and install dependencies:
 ```bash
+# Clone the repository
+git clone https://github.com/dhruvgcs24-programer/SkillMap1.git
+
+# Install dependencies
 npm install
 ```
 
-### 3. Environment Setup
-Create a `.env` file in the root directory and add your Supabase credentials:
+### 3. Environment Configuration
+Create a `.env` file in the root:
 ```env
 EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
 EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+EXPO_PUBLIC_OPENROUTER_API_KEY=your_api_key  # Optional for AI features
 ```
 
-### 4. Running the App
-Start the development server:
+### 4. Run the Development Server
 ```bash
 npx expo start
 ```
-- Press `a` for Android Emulator
-- Press `i` for iOS Simulator
-- Scan the QR code with Expo Go to run on a physical device
+Scan the QR code with **Expo Go** (Android) or the **Camera app** (iOS) to view the app on your phone.
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Architecture
 
 ```text
 SkillMap/
-├── app/               # Expo Router pages (Screens & Layouts)
-│   ├── (tabs)/        # Main tab-based navigation
-│   ├── login.js       # Authentication screens
-│   └── _layout.tsx    # Root layout with providers
+├── app/                  # File-based Routing (Expo Router)
+│   ├── (tabs)/           # Main Application Shell (Home, Roadmaps, Profile)
+│   ├── (auth)/           # Authentication Flow
+│   └── _layout.tsx       # Root Provider Configuration
+├── components/           # UI Components
+│   ├── ui/               # Atomic Design Components (Buttons, Cards)
+│   ├── roadmapAI.js      # AI Generation Logic & Prompting
+│   └── MasteryRing.js    # Progress Visualization
 ├── src/
-│   ├── components/    # Reusable UI components
-│   ├── data/          # Roadmap definitions (roadmapData.js)
-│   ├── services/      # Supabase and API clients
-│   └── constants/     # Theme and styling constants
-├── assets/            # Images, fonts, and static files
-└── components/        # Shared application components
+│   ├── data/             # Static Roadmap Definitions
+│   ├── services/         # Supabase & API Client Config
+│   ├── hooks/            # Custom React Hooks
+│   └── constants/        # Theme & Color Tokens
+└── assets/               # Branding, Icons, and Lottie Animations
 ```
 
 ---
 
-## 🗺 Current Roadmaps
+## 🗺 Available Roadmaps
 
-| Category | Available Paths |
+| Path Type | Current Offerings |
 | :--- | :--- |
-| **Role-based** | Backend Developer, Frontend Developer, AI Engineer (Coming Soon), DevOps (Coming Soon) |
-| **Skill-based** | Python Mastery, JavaScript, SQL & Databases, React Native |
+| **Role-Based** | 🎨 Frontend Engineer, ⚙️ Backend Developer, 📱 React Native Expert |
+| **Skill-Based** | 🐍 Python Mastery, 📜 JavaScript Deep Dive, 📊 SQL & Databases |
+| **AI-Generated** | ⚡ Any topic of your choice via the AI Assistant |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you'd like to add a new roadmap or improve an existing one, please check `src/data/roadmapData.js` to see the structure for modules and resources.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+We love contributions! Whether it's a bug fix, a new roadmap, or a UI enhancement:
+1. **Fork** the repo.
+2. Create a **Feature Branch** (`git checkout -b feature/AmazingFeature`).
+3. **Commit** your changes (`git commit -m 'Add AmazingFeature'`).
+4. **Push** to the branch (`git push origin feature/AmazingFeature`).
+5. Open a **Pull Request**.
 
 ---
 
 ## 📄 License
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE` for details.
 
 ---
-Built with ❤️ for the Developer Community.
+Built with 💜 by the SkillMap Team.
 
