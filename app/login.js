@@ -7,6 +7,7 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from "react-native";
 
 import * as WebBrowser from "expo-web-browser";
@@ -89,9 +90,13 @@ const signInWithGoogle = async () => {
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ width: "100%" }}
+        style={{ flex: 1, width: "100%" }}
       >
-        <View style={styles.logoContainer}>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 24 }}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.logoContainer}>
           <Ionicons
             name="map"
             size={60}
@@ -214,6 +219,7 @@ const signInWithGoogle = async () => {
             </Text>
           </TouchableOpacity>
         </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </LinearGradient>
   );
@@ -222,8 +228,6 @@ const signInWithGoogle = async () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    padding: 24,
   },
 
   logoContainer: {

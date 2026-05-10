@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native'
 
 import { LinearGradient } from 'expo-linear-gradient'
@@ -64,8 +66,13 @@ export default function SignUpScreen() {
       colors={['#020617', '#111827', '#0F172A']}
       style={{ flex: 1 }}
     >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1, width: "100%" }}
+      >
       <ScrollView
         contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
       >
         <View style={styles.logoContainer}>
           <Ionicons
@@ -164,6 +171,7 @@ export default function SignUpScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </LinearGradient>
   )
 }
@@ -172,6 +180,8 @@ const styles = StyleSheet.create({
   container: {
     padding: 24,
     paddingBottom: 50,
+    flexGrow: 1,
+    justifyContent: "center",
   },
 
   logoContainer: {

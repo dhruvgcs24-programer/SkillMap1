@@ -248,14 +248,244 @@ const pythonRoadmap = {
 };
 
 // ─── FRONTEND ROADMAP ─────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+//  FRONTEND ROADMAP — paste this into roadmapData.js replacing frontendRoadmap
+//  All resources restored from original LearningModuleActivity.java
+// ─────────────────────────────────────────────────────────────────────────────
+
 const frontendRoadmap = {
   id: "frontend", title: "Frontend Developer", subtitle: "From HTML basics to modern React apps",
   icon: "desktop-outline", color: ["#ec4899", "#f97316"], category: "role",
   modules: [
-    { id: "fe_html_css", title: "HTML & CSS", subtitle: "The building blocks of the web", icon: "code-slash-outline", xp: 100, status: "completed", overview: "HTML and CSS are the foundation of every website. HTML structures content, CSS styles it. Master these before anything else.", subTopics: [{ id: "fe_html", number: "01", title: "HTML Fundamentals", description: "Learn semantic HTML5 elements, forms, tables, media, and accessibility. Understand the DOM and how browsers parse HTML.", resources: [{ type: "Official", label: "MDN – HTML Basics", url: "https://developer.mozilla.org/en-US/docs/Learn/HTML" }, { type: "Course", label: "freeCodeCamp – Responsive Web Design", url: "https://www.freecodecamp.org/learn/2022/responsive-web-design/" }, { type: "Course", label: "W3Schools HTML Tutorial", url: "https://www.w3schools.com/html/" }] }, { id: "fe_css", number: "02", title: "CSS Fundamentals", description: "Learn selectors, the box model, positioning, display, and CSS units. Understand specificity and cascade.", resources: [{ type: "Official", label: "MDN – CSS First Steps", url: "https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps" }, { type: "Course", label: "web.dev – Learn CSS", url: "https://web.dev/learn/css/" }, { type: "Video", label: "freeCodeCamp – CSS Full Course", url: "https://www.youtube.com/watch?v=1Rs2ND1ryYc" }] }, { id: "fe_flexbox", number: "03", title: "Flexbox", description: "Flexbox is the one-dimensional layout system. Master flex-direction, justify-content, align-items, flex-wrap, and align-self.", resources: [{ type: "Course", label: "Flexbox Froggy – Interactive Game", url: "https://flexboxfroggy.com/" }, { type: "Official", label: "MDN – Flexbox Guide", url: "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox" }] }, { id: "fe_grid", number: "04", title: "CSS Grid", description: "CSS Grid is the two-dimensional layout system. Learn grid-template-columns, grid-template-rows, grid-area, and auto-fill/auto-fit.", resources: [{ type: "Course", label: "CSS Grid Garden – Interactive Game", url: "https://cssgridgarden.com/" }, { type: "Official", label: "MDN – CSS Grid Layout", url: "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout" }] }, { id: "fe_responsive", number: "05", title: "Responsive Design", description: "Learn media queries, mobile-first design, viewport meta tag, and responsive images. Build layouts that work on any screen size.", resources: [{ type: "Official", label: "MDN – Responsive Design", url: "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design" }] }] },
-    { id: "fe_javascript", title: "JavaScript", subtitle: "The language of the web", icon: "logo-javascript", xp: 200, status: "active", overview: "JavaScript is the only programming language that runs natively in the browser. It's essential for adding interactivity, handling events, and communicating with APIs.", subTopics: [{ id: "fe_js_basics", number: "01", title: "JS Fundamentals", description: "Variables (let, const, var), data types, operators, control flow, functions, and scope. Understand hoisting and the temporal dead zone.", resources: [{ type: "Official", label: "javascript.info – Full JS Guide", url: "https://javascript.info/" }, { type: "Course", label: "freeCodeCamp – JS Algorithms", url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/" }] }, { id: "fe_js_dom", number: "02", title: "DOM Manipulation", description: "The Document Object Model is how JavaScript interacts with HTML. Learn querySelector, addEventListener, createElement, appendChild, and classList.", resources: [{ type: "Official", label: "MDN – DOM Introduction", url: "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" }] }, { id: "fe_js_async", number: "03", title: "Fetch API & Promises", description: "Fetch data from APIs using fetch(). Learn Promises, .then()/.catch(), async/await, and error handling for network requests.", resources: [{ type: "Official", label: "MDN – Using Fetch", url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" }, { type: "Official", label: "javascript.info – Promises", url: "https://javascript.info/promise-basics" }] }, { id: "fe_js_es6", number: "04", title: "ES6+ Features", description: "Modern JS: arrow functions, destructuring, spread/rest operators, template literals, optional chaining, nullish coalescing, and modules (import/export).", resources: [{ type: "Course", label: "javascript.info – Modern JS", url: "https://javascript.info/" }] }] },
-    { id: "fe_react", title: "React", subtitle: "The most popular UI library", icon: "logo-react", xp: 300, status: "locked", overview: "React is a JavaScript library for building user interfaces using reusable components. It's the most in-demand frontend skill in the job market today.", subTopics: [{ id: "fe_react_basics", number: "01", title: "React Fundamentals", description: "Learn components, JSX, props, state with useState, and event handling. Understand the virtual DOM and how React re-renders.", resources: [{ type: "Official", label: "React Docs – Quick Start", url: "https://react.dev/learn" }, { type: "Video", label: "React Crash Course – Traversy Media", url: "https://www.youtube.com/watch?v=w7ejDZ8SWv8" }] }, { id: "fe_react_hooks", number: "02", title: "Hooks", description: "React Hooks: useState, useEffect, useContext, useRef, useMemo, useCallback. Understand the rules of hooks and how to write custom hooks.", resources: [{ type: "Official", label: "React Docs – Hooks", url: "https://react.dev/reference/react" }] }, { id: "fe_react_router", number: "03", title: "React Router", description: "Client-side routing with React Router v6. Learn Routes, Route, Link, NavLink, useNavigate, useParams, and protected routes.", resources: [{ type: "Official", label: "React Router Docs", url: "https://reactrouter.com/en/main" }] }, { id: "fe_react_state", number: "04", title: "State Management", description: "For complex apps, learn Redux Toolkit or Zustand for global state management. Understand when local state is enough vs when you need global state.", resources: [{ type: "Official", label: "Redux Toolkit Docs", url: "https://redux-toolkit.js.org/" }, { type: "Official", label: "Zustand GitHub", url: "https://github.com/pmndrs/zustand" }] }] },
-    { id: "fe_typescript", title: "TypeScript", subtitle: "JavaScript with types", icon: "shield-checkmark-outline", xp: 200, status: "locked", overview: "TypeScript adds static types to JavaScript, catching errors before runtime. It's now the standard for large-scale frontend projects.", subTopics: [{ id: "fe_ts_basics", number: "01", title: "TypeScript Basics", description: "Learn types, interfaces, type aliases, enums, generics, and union types. Understand how TypeScript compiles to JavaScript.", resources: [{ type: "Official", label: "TypeScript Handbook", url: "https://www.typescriptlang.org/docs/handbook/intro.html" }, { type: "Course", label: "Total TypeScript – Free", url: "https://www.totaltypescript.com/tutorials" }] }, { id: "fe_ts_react", number: "02", title: "TypeScript with React", description: "Type your React components, props, state, events, and hooks. Learn how to use generics with React hooks.", resources: [{ type: "Official", label: "React TypeScript Cheatsheet", url: "https://react-typescript-cheatsheet.netlify.app/" }] }] },
+    {
+      id: "fe_html", title: "HTML", subtitle: "Structure of the web",
+      icon: "code-slash-outline", xp: 100, status: "completed",
+      overview: "HTML is the skeleton of every web page. Learn semantic HTML5 elements, forms, tables, links, and how the browser parses HTML into a DOM tree. This is where every frontend journey begins.",
+      subTopics: [
+        {
+          id: "fe_html_basics", number: "01", title: "HTML Fundamentals",
+          description: "Learn semantic HTML5 elements, forms, tables, media, and accessibility. Understand the DOM and how browsers parse HTML. Everything on the web is built on HTML.",
+          resources: [
+            { type: "Course",   label: "freeCodeCamp – Responsive Web Design", url: "https://www.freecodecamp.org/learn/2022/responsive-web-design/" },
+            { type: "Video",    label: "HTML Full Course – Bro Code",           url: "https://www.youtube.com/watch?v=mJgBOIoGihA" },
+            { type: "Video",    label: "HTML Tutorial – Programming with Mosh", url: "https://www.youtube.com/watch?v=pQN-pnXPaVg" },
+            { type: "Official", label: "Dev.to – HTML Feed",                    url: "https://dev.to/t/html" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "fe_css", title: "CSS", subtitle: "Styling and layout",
+      icon: "brush-outline", xp: 120, status: "completed",
+      overview: "CSS controls the visual presentation of HTML. Learn selectors, the box model, flexbox, grid, and responsive design. Beautiful UIs start here.",
+      subTopics: [
+        {
+          id: "fe_css_basics", number: "01", title: "CSS Fundamentals",
+          description: "Learn selectors, the box model, positioning, display, and CSS units. Understand specificity and the cascade. Master flexbox and grid for layouts.",
+          resources: [
+            { type: "Course",   label: "freeCodeCamp – Responsive Web Design", url: "https://www.freecodecamp.org/learn/2022/responsive-web-design/" },
+            { type: "Official", label: "web.dev – Learn CSS",                  url: "https://web.dev/learn/css/" },
+            { type: "Video",    label: "CSS Full Course – Dave Gray",           url: "https://www.youtube.com/watch?v=n4R2E7O-Ngo" },
+            { type: "Video",    label: "CSS Tutorial – Kevin Powell",           url: "https://www.youtube.com/watch?v=G3e-cpL7ofc" },
+          ],
+        },
+        {
+          id: "fe_css_flexbox", number: "02", title: "Flexbox",
+          description: "Flexbox is the one-dimensional layout system. Master flex-direction, justify-content, align-items, flex-wrap, and align-self. Essential for building modern UI layouts.",
+          resources: [
+            { type: "Course",   label: "Flexbox Froggy – Interactive Game",    url: "https://flexboxfroggy.com/" },
+            { type: "Official", label: "MDN – Flexbox Guide",                  url: "https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox" },
+          ],
+        },
+        {
+          id: "fe_css_grid", number: "03", title: "CSS Grid",
+          description: "CSS Grid is the two-dimensional layout system. Learn grid-template-columns, grid-template-rows, grid-area, and auto-fill/auto-fit. Build complex layouts with ease.",
+          resources: [
+            { type: "Course",   label: "CSS Grid Garden – Interactive Game",   url: "https://cssgridgarden.com/" },
+            { type: "Official", label: "MDN – CSS Grid Layout",                url: "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "fe_javascript", title: "JavaScript", subtitle: "The language of the web",
+      icon: "logo-javascript", xp: 200, status: "active",
+      overview: "JavaScript is the only programming language that runs natively in the browser. It's essential for adding interactivity, handling events, and communicating with APIs.",
+      subTopics: [
+        {
+          id: "fe_js_basics", number: "01", title: "JavaScript Fundamentals",
+          description: "Variables (let, const, var), data types, operators, control flow, functions, and scope. Understand hoisting and the temporal dead zone.",
+          resources: [
+            { type: "Official", label: "javascript.info – Full JS Guide",       url: "https://javascript.info/" },
+            { type: "Official", label: "JavaScript30 – 30 Day Challenge",       url: "https://javascript30.com/" },
+            { type: "Course",   label: "freeCodeCamp – JS Algorithms",          url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/" },
+          ],
+        },
+        {
+          id: "fe_js_dom", number: "02", title: "DOM Manipulation",
+          description: "The Document Object Model is how JavaScript interacts with HTML. Learn querySelector, addEventListener, createElement, appendChild, and classList.",
+          resources: [
+            { type: "Official", label: "MDN – DOM Introduction",               url: "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" },
+          ],
+        },
+        {
+          id: "fe_js_async", number: "03", title: "Async JavaScript",
+          description: "Fetch data from APIs using fetch(). Learn Promises, .then()/.catch(), async/await, and error handling for network requests.",
+          resources: [
+            { type: "Official", label: "MDN – Using Fetch",                    url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" },
+            { type: "Official", label: "javascript.info – Promises",           url: "https://javascript.info/promise-basics" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "fe_vcs", title: "Version Control", subtitle: "Git, GitHub and GitLab",
+      icon: "git-branch-outline", xp: 100, status: "locked",
+      overview: "Version control tracks every change to your codebase so you can collaborate, roll back mistakes, and ship confidently. Git is the industry standard — non-negotiable for any developer.",
+      subTopics: [
+        {
+          id: "fe_git", number: "01", title: "Git",
+          description: "Git is a distributed version control system. Master the core workflow: clone, add, commit, push, pull, branch, merge, and rebase. Learn to resolve merge conflicts. Non-negotiable for any developer.",
+          resources: [
+            { type: "Official", label: "Git Cheatsheet – cs.fyi",              url: "https://cs.fyi/guide/git-cheatsheet" },
+            { type: "Official", label: "Git for Absolutely Everyone",          url: "https://thenewstack.io/tutorial-git-for-absolutely-everyone/" },
+            { type: "Video",    label: "Git & GitHub Crash Course",            url: "https://www.youtube.com/watch?v=SWYqp7iY_Tc" },
+          ],
+        },
+        {
+          id: "fe_github", number: "02", title: "GitHub",
+          description: "GitHub is the world's largest code hosting platform. Learn to create repos, fork projects, raise pull requests, and review code. Your GitHub profile is your portfolio.",
+          resources: [
+            { type: "Official", label: "GitHub Docs – Hello World",            url: "https://docs.github.com/en/get-started/start-your-journey/hello-world" },
+            { type: "Course",   label: "GitHub Skills – Free Interactive",     url: "https://learn.github.com/skills" },
+            { type: "Video",    label: "Git and GitHub – Traversy Media",      url: "https://www.youtube.com/watch?v=w3jLJU7DT5E" },
+          ],
+        },
+        {
+          id: "fe_gitlab", number: "03", title: "GitLab",
+          description: "GitLab is a complete DevOps platform with built-in CI/CD, container registry, and security scanning — and can be self-hosted for free. Many enterprises prefer it for its all-in-one approach.",
+          resources: [
+            { type: "Official", label: "GitLab – About",                       url: "https://about.gitlab.com/" },
+            { type: "Official", label: "GitLab Docs",                          url: "https://docs.gitlab.com/" },
+            { type: "Official", label: "Connect Git to GitLab",                url: "https://thenewstack.io/development-connect-git-to-gitlab-for-small-projects/" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "fe_package_managers", title: "Package Managers", subtitle: "npm, pnpm, yarn and bun",
+      icon: "cube-outline", xp: 100, status: "locked",
+      overview: "Package managers let you install, update, and manage JavaScript libraries and tools. Every modern frontend project uses one. Learn npm first, then explore the alternatives.",
+      subTopics: [
+        {
+          id: "fe_npm", number: "01", title: "npm",
+          description: "npm is the default package manager for Node.js. Learn npm install, npm run, package.json, lock files, and the difference between dependencies and devDependencies.",
+          resources: [
+            { type: "Official", label: "npm Official Website",                 url: "https://www.npmjs.com/" },
+            { type: "Official", label: "npm Docs",                             url: "https://docs.npmjs.com/" },
+            { type: "Course",   label: "how-to-npm – Interactive Tutorial",   url: "https://github.com/workshopper/how-to-npm" },
+            { type: "Official", label: "Modern JS Explained for Dinosaurs",   url: "https://peterxjang.com/blog/modern-javascript-explained-for-dinosaurs.html" },
+            { type: "Video",    label: "npm Crash Course – Traversy Media",   url: "https://www.youtube.com/watch?v=2V1UUhBJ62Y" },
+          ],
+        },
+        {
+          id: "fe_pnpm", number: "02", title: "pnpm",
+          description: "pnpm is a fast, disk-efficient package manager. It uses a content-addressable store to avoid duplicating packages across projects. Great for monorepos.",
+          resources: [
+            { type: "Official", label: "pnpm Official Website",               url: "https://pnpm.io/" },
+            { type: "Official", label: "pnpm vs npm – Bitsrc Blog",           url: "https://blog.bitsrc.io/pnpm-javascript-package-manager-4b5abd59dc9" },
+            { type: "Video",    label: "pnpm Tutorial – YouTube",             url: "https://www.youtube.com/watch?v=MvbReZDSKHI" },
+          ],
+        },
+        {
+          id: "fe_yarn", number: "03", title: "Yarn",
+          description: "Yarn is a fast, reliable package manager by Facebook. It introduced lock files and workspaces before npm. Yarn Berry (v2+) introduced Plug'n'Play for zero-install workflows.",
+          resources: [
+            { type: "Official", label: "Yarn – Getting Started",              url: "https://classic.yarnpkg.com/en/docs/getting-started" },
+            { type: "Video",    label: "Yarn Tutorial – YouTube",             url: "https://www.youtube.com/watch?v=g9_6KmiBISk" },
+          ],
+        },
+        {
+          id: "fe_bun", number: "04", title: "Bun",
+          description: "Bun is an all-in-one JavaScript toolkit: runtime, bundler, test runner, and package manager — all blazingly fast. Written in Zig, it's much faster than Node.js for many tasks.",
+          resources: [
+            { type: "Official", label: "Bun Official Website",                url: "https://bun.com/" },
+            { type: "Official", label: "Bun Docs",                            url: "http://bun.com/docs" },
+            { type: "Official", label: "Bun GitHub",                          url: "https://github.com/oven-sh/bun" },
+            { type: "Official", label: "Bun Deep Dive – Kinsta Blog",         url: "https://kinsta.com/blog/bun-sh/" },
+            { type: "Video",    label: "Bun Crash Course – YouTube",          url: "https://www.youtube.com/watch?v=dWqNgzZwVJQ" },
+            { type: "Video",    label: "Bun vs Node.js – YouTube",            url: "https://www.youtube.com/watch?v=U4JVw8K19uY" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "fe_css_frameworks", title: "CSS Frameworks", subtitle: "Tailwind CSS and beyond",
+      icon: "color-palette-outline", xp: 150, status: "locked",
+      overview: "CSS frameworks give you pre-built utility classes and components so you can build beautiful UIs faster. Tailwind CSS is the dominant choice for modern projects — it's utility-first, highly customizable, and loved by developers.",
+      subTopics: [
+        {
+          id: "fe_tailwind", number: "01", title: "Tailwind CSS",
+          description: "Tailwind is a utility-first CSS framework. Instead of writing CSS, you compose small utility classes directly in HTML. It's highly customizable via tailwind.config.js and pairs perfectly with React and React Native.",
+          resources: [
+            { type: "Video",    label: "Tailwind CSS Full Course",             url: "https://www.youtube.com/watch?v=lCxcTsOHrjo" },
+            { type: "Official", label: "Tailwind CSS Official Docs",           url: "https://tailwindcss.com/" },
+            { type: "Official", label: "Tailwind Play – Browser Playground",  url: "https://play.tailwindcss.com/" },
+            { type: "Video",    label: "Tailwind in 100 seconds",              url: "https://www.youtube.com/watch?v=hdGsFpZ0J2E" },
+            { type: "Video",    label: "Tailwind Labs – Official YouTube",     url: "https://www.youtube.com/c/TailwindLabs/videos" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "fe_frameworks", title: "Pick a Framework", subtitle: "React, Vue, Angular, Svelte or Solid",
+      icon: "layers-outline", xp: 300, status: "locked",
+      overview: "JavaScript frameworks provide structure for building large-scale web applications. React dominates the job market, but Vue, Angular, Svelte, and Solid all have strong communities. Pick one and go deep.",
+      subTopics: [
+        {
+          id: "fe_react", number: "01", title: "React",
+          description: "React is the most popular UI library. Build components with JSX, manage state with hooks (useState, useEffect), and handle routing with React Router. The most in-demand frontend skill today.",
+          resources: [
+            { type: "Video",    label: "React Full Course – Bro Code",         url: "https://www.youtube.com/watch?v=Bvwq_S0n2pk" },
+            { type: "Official", label: "React Official Docs",                  url: "https://react.dev/" },
+          ],
+        },
+        {
+          id: "fe_vue", number: "02", title: "Vue.js",
+          description: "Vue is a progressive framework with a gentle learning curve. Its Options API is great for beginners, while the Composition API (Vue 3) is powerful for large apps. Excellent documentation.",
+          resources: [
+            { type: "Official", label: "Vue.js Official Docs",                 url: "https://vuejs.org/" },
+            { type: "Video",    label: "Vue.js Crash Course – Traversy Media", url: "https://www.youtube.com/watch?v=VeNfHj6MhgA" },
+          ],
+        },
+        {
+          id: "fe_angular", number: "03", title: "Angular",
+          description: "Angular is a full-featured, opinionated framework by Google. Built with TypeScript, it includes dependency injection, RxJS, forms, routing, and more out of the box. Popular in enterprise.",
+          resources: [
+            { type: "Official", label: "Angular – Learn Angular Tutorial",     url: "https://angular.dev/tutorials/learn-angular" },
+            { type: "Video",    label: "Angular Crash Course – YouTube",       url: "https://www.youtube.com/watch?v=3qBXWUpoPHo" },
+          ],
+        },
+        {
+          id: "fe_svelte", number: "04", title: "Svelte",
+          description: "Svelte is a radical new approach — it compiles your components to vanilla JS at build time, so there's no virtual DOM. The result is tiny, fast apps with very little boilerplate.",
+          resources: [
+            { type: "Video",    label: "Svelte Tutorial – The Net Ninja",      url: "https://www.youtube.com/playlist?list=PL4cUxeGkcC9hlbrVO_2QFVqVPhlZmz7tO" },
+            { type: "Official", label: "Svelte Official Website",              url: "https://svelte.dev/" },
+            { type: "Official", label: "Svelte and the Future of Frontend",    url: "https://thenewstack.io/svelte-and-the-future-of-front-end-development/" },
+          ],
+        },
+        {
+          id: "fe_solid", number: "05", title: "SolidJS",
+          description: "SolidJS offers React-like syntax but with true reactivity — no virtual DOM, fine-grained updates, and incredible performance. A great choice for performance-critical UIs.",
+          resources: [
+            { type: "Official", label: "SolidJS Official Website",             url: "https://www.solidjs.com/" },
+            { type: "Official", label: "SolidJS Tutorial",                     url: "https://www.solidjs.com/tutorial/introduction_basics" },
+            { type: "Video",    label: "SolidJS Crash Course – YouTube",       url: "https://www.youtube.com/watch?v=hw3Bx5vxKl0" },
+          ],
+        },
+      ],
+    },
   ],
 };
 
