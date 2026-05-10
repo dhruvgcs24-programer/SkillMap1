@@ -9,18 +9,13 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-
 import * as WebBrowser from "expo-web-browser";
+import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import { supabase } from "../src/services/supabase";
 
 WebBrowser.maybeCompleteAuthSession();
-
-import { LinearGradient } from "expo-linear-gradient";
-
-import { Ionicons } from "@expo/vector-icons";
-
-import { router } from "expo-router";
-
-import { supabase } from "../src/services/supabase";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -215,7 +210,7 @@ const signInWithGoogle = async () => {
             }
           >
             <Text style={styles.signup}>
-              Don't have an account? Sign Up
+              Don&apos;t have an account? Sign Up
             </Text>
           </TouchableOpacity>
         </View>
