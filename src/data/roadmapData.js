@@ -247,6 +247,761 @@ const pythonRoadmap = {
   ],
 };
 
+
+// React Roadmap — based on roadmap.sh/react
+// Drop this into src/data/roadmapData.js inside ALL_ROADMAPS
+
+export const REACT_ROADMAP = {
+  id: "react",
+  title: "React Developer",
+  subtitle: "Master React from fundamentals to advanced patterns",
+  category: "skill",
+  icon: "logo-react",
+  color: ["#61DAFB", "#2188FF"],
+  description: "Master React from fundamentals to advanced patterns used in production apps.",
+  modules: [
+    {
+      id: "react-prerequisites",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "Prerequisites",
+      subtitle: "Learn Prerequisites in depth",
+      overview: "This module covers Prerequisites, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 100,
+      subTopics: [
+        {
+          id: "react-pre-html",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "HTML & CSS Basics",
+          resources: [
+            { type: "Official", label: "MDN HTML Docs", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+            { type: "Official", label: "MDN CSS Docs", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+          ],
+        },
+        {
+          id: "react-pre-js",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "JavaScript Fundamentals",
+          resources: [
+            { type: "Official", label: "javascript.info", url: "https://javascript.info/" },
+            { type: "Official", label: "MDN JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+          ],
+        },
+        {
+          id: "react-pre-es6",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "ES6+ Features (Arrow functions, Destructuring, Spread, Modules)",
+          resources: [
+            { type: "Official", label: "ES6 Features Overview", url: "https://es6-features.org/" },
+            { type: "Official", label: "javascript.info Modern JS", url: "https://javascript.info/js" },
+          ],
+        },
+        {
+          id: "react-pre-npm",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Package Managers (npm / yarn)",
+          resources: [
+            { type: "Official", label: "npm Docs", url: "https://docs.npmjs.com/" },
+            { type: "Official", label: "Yarn Docs", url: "https://yarnpkg.com/getting-started" },
+          ],
+        },
+        {
+          id: "react-pre-git",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Git & GitHub Basics",
+          resources: [
+            { type: "Official", label: "Git Official Docs", url: "https://git-scm.com/doc" },
+            { type: "Official", label: "GitHub Quickstart", url: "https://docs.github.com/en/get-started/quickstart" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-fundamentals",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "React Fundamentals",
+      subtitle: "Learn React Fundamentals in depth",
+      overview: "This module covers React Fundamentals, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 200,
+      subTopics: [
+        {
+          id: "react-fund-what",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "What is React & Why Use It",
+          resources: [
+            { type: "Official", label: "React Official Docs", url: "https://react.dev/learn" },
+          ],
+        },
+        {
+          id: "react-fund-jsx",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "JSX — Syntax & Rules",
+          resources: [
+            { type: "Official", label: "React — Writing Markup with JSX", url: "https://react.dev/learn/writing-markup-with-jsx" },
+          ],
+        },
+        {
+          id: "react-fund-components",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Components — Functional & Class",
+          resources: [
+            { type: "Official", label: "Your First Component", url: "https://react.dev/learn/your-first-component" },
+            { type: "Official", label: "Class vs Functional Components", url: "https://react.dev/reference/react/Component" },
+          ],
+        },
+        {
+          id: "react-fund-props",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Props & PropTypes",
+          resources: [
+            { type: "Official", label: "Passing Props to a Component", url: "https://react.dev/learn/passing-props-to-a-component" },
+            { type: "Official", label: "PropTypes Library", url: "https://www.npmjs.com/package/prop-types" },
+          ],
+        },
+        {
+          id: "react-fund-state",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "State & useState Hook",
+          resources: [
+            { type: "Official", label: "State: A Component's Memory", url: "https://react.dev/learn/state-a-components-memory" },
+            { type: "Official", label: "useState Reference", url: "https://react.dev/reference/react/useState" },
+          ],
+        },
+        {
+          id: "react-fund-events",
+          number: "07",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Event Handling",
+          resources: [
+            { type: "Official", label: "Responding to Events", url: "https://react.dev/learn/responding-to-events" },
+          ],
+        },
+        {
+          id: "react-fund-lists",
+          number: "08",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Lists & Keys",
+          resources: [
+            { type: "Official", label: "Rendering Lists", url: "https://react.dev/learn/rendering-lists" },
+          ],
+        },
+        {
+          id: "react-fund-conditional",
+          number: "09",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Conditional Rendering",
+          resources: [
+            { type: "Official", label: "Conditional Rendering", url: "https://react.dev/learn/conditional-rendering" },
+          ],
+        },
+        {
+          id: "react-fund-forms",
+          number: "10",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Forms & Controlled Components",
+          resources: [
+            { type: "Official", label: "Reacting to Input with State", url: "https://react.dev/learn/reacting-to-input-with-state" },
+          ],
+        },
+        {
+          id: "react-fund-composition",
+          number: "11",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Component Composition & children prop",
+          resources: [
+            { type: "Official", label: "Passing JSX as Children", url: "https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-hooks",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "React Hooks",
+      subtitle: "Learn React Hooks in depth",
+      overview: "This module covers React Hooks, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 250,
+      subTopics: [
+        {
+          id: "react-hook-useeffect",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "useEffect — Side Effects & Lifecycle",
+          resources: [
+            { type: "Official", label: "Synchronizing with Effects", url: "https://react.dev/learn/synchronizing-with-effects" },
+            { type: "Official", label: "useEffect Reference", url: "https://react.dev/reference/react/useEffect" },
+          ],
+        },
+        {
+          id: "react-hook-usecontext",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "useContext — Context API",
+          resources: [
+            { type: "Official", label: "Passing Data Deeply with Context", url: "https://react.dev/learn/passing-data-deeply-with-context" },
+            { type: "Official", label: "useContext Reference", url: "https://react.dev/reference/react/useContext" },
+          ],
+        },
+        {
+          id: "react-hook-usereducer",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "useReducer — Complex State Logic",
+          resources: [
+            { type: "Official", label: "Extracting State Logic into a Reducer", url: "https://react.dev/learn/extracting-state-logic-into-a-reducer" },
+            { type: "Official", label: "useReducer Reference", url: "https://react.dev/reference/react/useReducer" },
+          ],
+        },
+        {
+          id: "react-hook-useref",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "useRef — DOM Access & Mutable Values",
+          resources: [
+            { type: "Official", label: "Referencing Values with Refs", url: "https://react.dev/learn/referencing-values-with-refs" },
+            { type: "Official", label: "useRef Reference", url: "https://react.dev/reference/react/useRef" },
+          ],
+        },
+        {
+          id: "react-hook-usememo",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "useMemo — Memoizing Expensive Computations",
+          resources: [
+            { type: "Official", label: "useMemo Reference", url: "https://react.dev/reference/react/useMemo" },
+          ],
+        },
+        {
+          id: "react-hook-usecallback",
+          number: "07",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "useCallback — Stable Function References",
+          resources: [
+            { type: "Official", label: "useCallback Reference", url: "https://react.dev/reference/react/useCallback" },
+          ],
+        },
+        {
+          id: "react-hook-custom",
+          number: "08",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Custom Hooks — Reusable Logic",
+          resources: [
+            { type: "Official", label: "Reusing Logic with Custom Hooks", url: "https://react.dev/learn/reusing-logic-with-custom-hooks" },
+          ],
+        },
+        {
+          id: "react-hook-rules",
+          number: "09",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Rules of Hooks",
+          resources: [
+            { type: "Official", label: "Rules of Hooks", url: "https://react.dev/reference/rules/rules-of-hooks" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-styling",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "Styling in React",
+      subtitle: "Learn Styling in React in depth",
+      overview: "This module covers Styling in React, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 150,
+      subTopics: [
+        {
+          id: "react-style-css",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Plain CSS & CSS Modules",
+          resources: [
+            { type: "Official", label: "CSS Modules GitHub", url: "https://github.com/css-modules/css-modules" },
+          ],
+        },
+        {
+          id: "react-style-tailwind",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Tailwind CSS",
+          resources: [
+            { type: "Official", label: "Tailwind CSS Docs", url: "https://tailwindcss.com/docs/installation" },
+            { type: "Official", label: "Tailwind with React", url: "https://tailwindcss.com/docs/guides/create-react-app" },
+          ],
+        },
+        {
+          id: "react-style-styled",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "CSS-in-JS — styled-components / Emotion",
+          resources: [
+            { type: "Official", label: "styled-components Docs", url: "https://styled-components.com/docs" },
+            { type: "Official", label: "Emotion Docs", url: "https://emotion.sh/docs/introduction" },
+          ],
+        },
+        {
+          id: "react-style-ui-libs",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "UI Libraries — shadcn/ui, MUI, Chakra UI",
+          resources: [
+            { type: "Official", label: "shadcn/ui", url: "https://ui.shadcn.com/" },
+            { type: "Official", label: "Material UI", url: "https://mui.com/" },
+            { type: "Official", label: "Chakra UI", url: "https://chakra-ui.com/" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-routing",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "Routing",
+      subtitle: "Learn Routing in depth",
+      overview: "This module covers Routing, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 150,
+      subTopics: [
+        {
+          id: "react-route-rrd",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "React Router DOM — Setup & Basic Routing",
+          resources: [
+            { type: "Official", label: "React Router Docs", url: "https://reactrouter.com/en/main" },
+            { type: "Official", label: "Tutorial", url: "https://reactrouter.com/en/main/start/tutorial" },
+          ],
+        },
+        {
+          id: "react-route-dynamic",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Dynamic Routes & URL Params",
+          resources: [
+            { type: "Official", label: "Dynamic Segments", url: "https://reactrouter.com/en/main/route/route#dynamic-segments" },
+          ],
+        },
+        {
+          id: "react-route-nested",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Nested Routes & Layouts",
+          resources: [
+            { type: "Official", label: "Nested Routes", url: "https://reactrouter.com/en/main/start/concepts#nested-routes" },
+          ],
+        },
+        {
+          id: "react-route-protected",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Protected Routes & Auth Guards",
+          resources: [
+            { type: "Official", label: "Auth Example", url: "https://reactrouter.com/en/main/start/examples" },
+          ],
+        },
+        {
+          id: "react-route-tanstack",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "TanStack Router (Modern Alternative)",
+          resources: [
+            { type: "Official", label: "TanStack Router Docs", url: "https://tanstack.com/router/latest" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-state-management",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "State Management",
+      subtitle: "Learn State Management in depth",
+      overview: "This module covers State Management, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 250,
+      subTopics: [
+        {
+          id: "react-state-context",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Context API + useReducer Pattern",
+          resources: [
+            { type: "Official", label: "Scaling Up with Reducer and Context", url: "https://react.dev/learn/scaling-up-with-reducer-and-context" },
+          ],
+        },
+        {
+          id: "react-state-zustand",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Zustand — Lightweight Global State",
+          resources: [
+            { type: "Official", label: "Zustand GitHub", url: "https://github.com/pmndrs/zustand" },
+            { type: "Official", label: "Zustand Docs", url: "https://docs.pmnd.rs/zustand/getting-started/introduction" },
+          ],
+        },
+        {
+          id: "react-state-redux",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Redux Toolkit — Scalable State",
+          resources: [
+            { type: "Official", label: "Redux Toolkit Docs", url: "https://redux-toolkit.js.org/" },
+            { type: "Official", label: "Redux Essentials Tutorial", url: "https://redux.js.org/tutorials/essentials/part-1-overview-concepts" },
+          ],
+        },
+        {
+          id: "react-state-jotai",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Jotai / Recoil — Atomic State",
+          resources: [
+            { type: "Official", label: "Jotai Docs", url: "https://jotai.org/" },
+          ],
+        },
+        {
+          id: "react-state-server",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Server State — TanStack Query (React Query)",
+          resources: [
+            { type: "Official", label: "TanStack Query Docs", url: "https://tanstack.com/query/latest" },
+            { type: "Official", label: "React Query in 100 Seconds", url: "https://www.youtube.com/watch?v=novnyCaa7To" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-api",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "API & Data Fetching",
+      subtitle: "Learn API & Data Fetching in depth",
+      overview: "This module covers API & Data Fetching, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 200,
+      subTopics: [
+        {
+          id: "react-api-fetch",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "fetch API & Axios",
+          resources: [
+            { type: "Official", label: "MDN fetch", url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" },
+            { type: "Official", label: "Axios Docs", url: "https://axios-http.com/docs/intro" },
+          ],
+        },
+        {
+          id: "react-api-async",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Async/Await & Error Handling",
+          resources: [
+            { type: "Official", label: "javascript.info Async/Await", url: "https://javascript.info/async-await" },
+          ],
+        },
+        {
+          id: "react-api-rq",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "TanStack Query — Caching, Refetching, Mutations",
+          resources: [
+            { type: "Official", label: "Quick Start", url: "https://tanstack.com/query/latest/docs/react/quick-start" },
+          ],
+        },
+        {
+          id: "react-api-swr",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "SWR — Stale-While-Revalidate",
+          resources: [
+            { type: "Official", label: "SWR Docs", url: "https://swr.vercel.app/" },
+          ],
+        },
+        {
+          id: "react-api-graphql",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "GraphQL with Apollo Client",
+          resources: [
+            { type: "Official", label: "Apollo Client Docs", url: "https://www.apollographql.com/docs/react/" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-performance",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "Performance Optimization",
+      subtitle: "Learn Performance Optimization in depth",
+      overview: "This module covers Performance Optimization, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 200,
+      subTopics: [
+        {
+          id: "react-perf-memo",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "React.memo — Preventing Re-renders",
+          resources: [
+            { type: "Official", label: "React.memo Reference", url: "https://react.dev/reference/react/memo" },
+          ],
+        },
+        {
+          id: "react-perf-lazy",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Code Splitting — React.lazy & Suspense",
+          resources: [
+            { type: "Official", label: "Lazy Loading Components", url: "https://react.dev/reference/react/lazy" },
+            { type: "Official", label: "Suspense Reference", url: "https://react.dev/reference/react/Suspense" },
+          ],
+        },
+        {
+          id: "react-perf-virtualize",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "List Virtualization — react-window / TanStack Virtual",
+          resources: [
+            { type: "Official", label: "react-window Docs", url: "https://react-window.vercel.app/" },
+            { type: "Official", label: "TanStack Virtual", url: "https://tanstack.com/virtual/latest" },
+          ],
+        },
+        {
+          id: "react-perf-profiler",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "React DevTools Profiler",
+          resources: [
+            { type: "Official", label: "Profiling React Apps", url: "https://react.dev/learn/react-developer-tools" },
+          ],
+        },
+        {
+          id: "react-perf-transitions",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "useTransition & useDeferredValue",
+          resources: [
+            { type: "Official", label: "useTransition", url: "https://react.dev/reference/react/useTransition" },
+            { type: "Official", label: "useDeferredValue", url: "https://react.dev/reference/react/useDeferredValue" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-testing",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "Testing",
+      subtitle: "Learn Testing in depth",
+      overview: "This module covers Testing, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 200,
+      subTopics: [
+        {
+          id: "react-test-jest",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Jest — Unit Testing Setup",
+          resources: [
+            { type: "Official", label: "Jest Docs", url: "https://jestjs.io/docs/getting-started" },
+            { type: "Official", label: "Jest with React", url: "https://jestjs.io/docs/tutorial-react" },
+          ],
+        },
+        {
+          id: "react-test-rtl",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "React Testing Library — Component Testing",
+          resources: [
+            { type: "Official", label: "RTL Docs", url: "https://testing-library.com/docs/react-testing-library/intro/" },
+            { type: "Official", label: "Common Mistakes", url: "https://kentcdodds.com/blog/common-mistakes-with-react-testing-library" },
+          ],
+        },
+        {
+          id: "react-test-msw",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "MSW — Mocking API Calls",
+          resources: [
+            { type: "Official", label: "Mock Service Worker Docs", url: "https://mswjs.io/docs/" },
+          ],
+        },
+        {
+          id: "react-test-cypress",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Cypress / Playwright — E2E Testing",
+          resources: [
+            { type: "Official", label: "Cypress Docs", url: "https://docs.cypress.io/" },
+            { type: "Official", label: "Playwright Docs", url: "https://playwright.dev/" },
+          ],
+        },
+        {
+          id: "react-test-vitest",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Vitest — Vite-native Test Runner",
+          resources: [
+            { type: "Official", label: "Vitest Docs", url: "https://vitest.dev/" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-advanced",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "Advanced Patterns",
+      subtitle: "Learn Advanced Patterns in depth",
+      overview: "This module covers Advanced Patterns, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 300,
+      subTopics: [
+        {
+          id: "react-adv-hoc",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Higher-Order Components (HOC)",
+          resources: [
+            { type: "Official", label: "HOC Pattern", url: "https://react.dev/reference/react/Component#legacy-lifecycle-methods" },
+          ],
+        },
+        {
+          id: "react-adv-render-props",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Render Props Pattern",
+          resources: [
+            { type: "Official", label: "Render Props", url: "https://react.dev/reference/react/cloneElement" },
+          ],
+        },
+        {
+          id: "react-adv-compound",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Compound Components Pattern",
+          resources: [
+            { type: "Official", label: "Compound Components — Kent C. Dodds", url: "https://kentcdodds.com/blog/compound-components-with-react-hooks" },
+          ],
+        },
+        {
+          id: "react-adv-portals",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Portals — Rendering Outside the DOM",
+          resources: [
+            { type: "Official", label: "createPortal Reference", url: "https://react.dev/reference/react-dom/createPortal" },
+          ],
+        },
+        {
+          id: "react-adv-error-boundary",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Error Boundaries",
+          resources: [
+            { type: "Official", label: "Error Boundaries", url: "https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary" },
+            { type: "Official", label: "react-error-boundary", url: "https://github.com/bvaughn/react-error-boundary" },
+          ],
+        },
+        {
+          id: "react-adv-concurrent",
+          number: "07",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Concurrent Features — Suspense for Data",
+          resources: [
+            { type: "Official", label: "Suspense Docs", url: "https://react.dev/reference/react/Suspense" },
+          ],
+        },
+        {
+          id: "react-adv-server",
+          number: "08",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "React Server Components (RSC)",
+          resources: [
+            { type: "Official", label: "Server Components Overview", url: "https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023" },
+            { type: "Official", label: "Next.js Server Components", url: "https://nextjs.org/docs/app/building-your-application/rendering/server-components" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "react-ecosystem",
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
+      title: "React Ecosystem & Meta-Frameworks",
+      subtitle: "Learn React Ecosystem & Meta-Frameworks in depth",
+      overview: "This module covers React Ecosystem & Meta-Frameworks, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
+      xp: 250,
+      subTopics: [
+        {
+          id: "react-eco-nextjs",
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Next.js — SSR, SSG, App Router",
+          resources: [
+            { type: "Official", label: "Next.js Docs", url: "https://nextjs.org/docs" },
+            { type: "Official", label: "Next.js Learn Course", url: "https://nextjs.org/learn" },
+          ],
+        },
+        {
+          id: "react-eco-remix",
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Remix — Full-stack React Framework",
+          resources: [
+            { type: "Official", label: "Remix Docs", url: "https://remix.run/docs/en/main" },
+          ],
+        },
+        {
+          id: "react-eco-vite",
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Vite — Build Tool & Dev Server",
+          resources: [
+            { type: "Official", label: "Vite Docs", url: "https://vitejs.dev/" },
+          ],
+        },
+        {
+          id: "react-eco-typescript",
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "TypeScript with React",
+          resources: [
+            { type: "Official", label: "React TypeScript Cheatsheet", url: "https://react-typescript-cheatsheet.netlify.app/" },
+            { type: "Official", label: "TypeScript Handbook", url: "https://www.typescriptlang.org/docs/handbook/intro.html" },
+          ],
+        },
+        {
+          id: "react-eco-storybook",
+          number: "06",
+          description: "Explore the core concepts and implementation details of this topic.",
+          title: "Storybook — UI Component Development",
+          resources: [
+            { type: "Official", label: "Storybook Docs", url: "https://storybook.js.org/docs/react/get-started/introduction" },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 // ─── FRONTEND ROADMAP ─────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────────────────
 //  FRONTEND ROADMAP — paste this into roadmapData.js replacing frontendRoadmap
@@ -259,10 +1014,15 @@ const frontendRoadmap = {
   modules: [
     {
       id: "fe_html", title: "HTML", subtitle: "Structure of the web",
+      subtitle: "Learn fe_html in depth",
+      overview: "This module covers fe_html, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
       icon: "code-slash-outline", xp: 100, status: "completed",
       overview: "HTML is the skeleton of every web page. Learn semantic HTML5 elements, forms, tables, links, and how the browser parses HTML into a DOM tree. This is where every frontend journey begins.",
       subTopics: [
         {
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_html_basics", number: "01", title: "HTML Fundamentals",
           description: "Learn semantic HTML5 elements, forms, tables, media, and accessibility. Understand the DOM and how browsers parse HTML. Everything on the web is built on HTML.",
           resources: [
@@ -275,11 +1035,18 @@ const frontendRoadmap = {
       ],
     },
     {
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
       id: "fe_css", title: "CSS", subtitle: "Styling and layout",
+      subtitle: "Learn fe_css in depth",
+      overview: "This module covers fe_css, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
       icon: "brush-outline", xp: 120, status: "completed",
       overview: "CSS controls the visual presentation of HTML. Learn selectors, the box model, flexbox, grid, and responsive design. Beautiful UIs start here.",
       subTopics: [
         {
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_css_basics", number: "01", title: "CSS Fundamentals",
           description: "Learn selectors, the box model, positioning, display, and CSS units. Understand specificity and the cascade. Master flexbox and grid for layouts.",
           resources: [
@@ -290,6 +1057,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_css_flexbox", number: "02", title: "Flexbox",
           description: "Flexbox is the one-dimensional layout system. Master flex-direction, justify-content, align-items, flex-wrap, and align-self. Essential for building modern UI layouts.",
           resources: [
@@ -298,6 +1067,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_css_grid", number: "03", title: "CSS Grid",
           description: "CSS Grid is the two-dimensional layout system. Learn grid-template-columns, grid-template-rows, grid-area, and auto-fill/auto-fit. Build complex layouts with ease.",
           resources: [
@@ -308,11 +1079,18 @@ const frontendRoadmap = {
       ],
     },
     {
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
       id: "fe_javascript", title: "JavaScript", subtitle: "The language of the web",
+      subtitle: "Learn fe_javascript in depth",
+      overview: "This module covers fe_javascript, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
       icon: "logo-javascript", xp: 200, status: "active",
       overview: "JavaScript is the only programming language that runs natively in the browser. It's essential for adding interactivity, handling events, and communicating with APIs.",
       subTopics: [
         {
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_js_basics", number: "01", title: "JavaScript Fundamentals",
           description: "Variables (let, const, var), data types, operators, control flow, functions, and scope. Understand hoisting and the temporal dead zone.",
           resources: [
@@ -322,6 +1100,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_js_dom", number: "02", title: "DOM Manipulation",
           description: "The Document Object Model is how JavaScript interacts with HTML. Learn querySelector, addEventListener, createElement, appendChild, and classList.",
           resources: [
@@ -329,6 +1109,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_js_async", number: "03", title: "Async JavaScript",
           description: "Fetch data from APIs using fetch(). Learn Promises, .then()/.catch(), async/await, and error handling for network requests.",
           resources: [
@@ -339,11 +1121,18 @@ const frontendRoadmap = {
       ],
     },
     {
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
       id: "fe_vcs", title: "Version Control", subtitle: "Git, GitHub and GitLab",
+      subtitle: "Learn fe_vcs in depth",
+      overview: "This module covers fe_vcs, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
       icon: "git-branch-outline", xp: 100, status: "locked",
       overview: "Version control tracks every change to your codebase so you can collaborate, roll back mistakes, and ship confidently. Git is the industry standard — non-negotiable for any developer.",
       subTopics: [
         {
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_git", number: "01", title: "Git",
           description: "Git is a distributed version control system. Master the core workflow: clone, add, commit, push, pull, branch, merge, and rebase. Learn to resolve merge conflicts. Non-negotiable for any developer.",
           resources: [
@@ -353,6 +1142,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_github", number: "02", title: "GitHub",
           description: "GitHub is the world's largest code hosting platform. Learn to create repos, fork projects, raise pull requests, and review code. Your GitHub profile is your portfolio.",
           resources: [
@@ -362,6 +1153,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_gitlab", number: "03", title: "GitLab",
           description: "GitLab is a complete DevOps platform with built-in CI/CD, container registry, and security scanning — and can be self-hosted for free. Many enterprises prefer it for its all-in-one approach.",
           resources: [
@@ -373,11 +1166,18 @@ const frontendRoadmap = {
       ],
     },
     {
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
       id: "fe_package_managers", title: "Package Managers", subtitle: "npm, pnpm, yarn and bun",
+      subtitle: "Learn fe_package_managers in depth",
+      overview: "This module covers fe_package_managers, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
       icon: "cube-outline", xp: 100, status: "locked",
       overview: "Package managers let you install, update, and manage JavaScript libraries and tools. Every modern frontend project uses one. Learn npm first, then explore the alternatives.",
       subTopics: [
         {
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_npm", number: "01", title: "npm",
           description: "npm is the default package manager for Node.js. Learn npm install, npm run, package.json, lock files, and the difference between dependencies and devDependencies.",
           resources: [
@@ -389,6 +1189,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_pnpm", number: "02", title: "pnpm",
           description: "pnpm is a fast, disk-efficient package manager. It uses a content-addressable store to avoid duplicating packages across projects. Great for monorepos.",
           resources: [
@@ -398,6 +1200,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_yarn", number: "03", title: "Yarn",
           description: "Yarn is a fast, reliable package manager by Facebook. It introduced lock files and workspaces before npm. Yarn Berry (v2+) introduced Plug'n'Play for zero-install workflows.",
           resources: [
@@ -406,6 +1210,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_bun", number: "04", title: "Bun",
           description: "Bun is an all-in-one JavaScript toolkit: runtime, bundler, test runner, and package manager — all blazingly fast. Written in Zig, it's much faster than Node.js for many tasks.",
           resources: [
@@ -420,11 +1226,18 @@ const frontendRoadmap = {
       ],
     },
     {
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
       id: "fe_css_frameworks", title: "CSS Frameworks", subtitle: "Tailwind CSS and beyond",
+      subtitle: "Learn fe_css_frameworks in depth",
+      overview: "This module covers fe_css_frameworks, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
       icon: "color-palette-outline", xp: 150, status: "locked",
       overview: "CSS frameworks give you pre-built utility classes and components so you can build beautiful UIs faster. Tailwind CSS is the dominant choice for modern projects — it's utility-first, highly customizable, and loved by developers.",
       subTopics: [
         {
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_tailwind", number: "01", title: "Tailwind CSS",
           description: "Tailwind is a utility-first CSS framework. Instead of writing CSS, you compose small utility classes directly in HTML. It's highly customizable via tailwind.config.js and pairs perfectly with React and React Native.",
           resources: [
@@ -438,11 +1251,18 @@ const frontendRoadmap = {
       ],
     },
     {
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
       id: "fe_frameworks", title: "Pick a Framework", subtitle: "React, Vue, Angular, Svelte or Solid",
+      subtitle: "Learn fe_frameworks in depth",
+      overview: "This module covers fe_frameworks, focusing on practical usage and best practices in modern React development.",
+      icon: "logo-react",
       icon: "layers-outline", xp: 300, status: "locked",
       overview: "JavaScript frameworks provide structure for building large-scale web applications. React dominates the job market, but Vue, Angular, Svelte, and Solid all have strong communities. Pick one and go deep.",
       subTopics: [
         {
+          number: "01",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_react", number: "01", title: "React",
           description: "React is the most popular UI library. Build components with JSX, manage state with hooks (useState, useEffect), and handle routing with React Router. The most in-demand frontend skill today.",
           resources: [
@@ -451,6 +1271,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "02",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_vue", number: "02", title: "Vue.js",
           description: "Vue is a progressive framework with a gentle learning curve. Its Options API is great for beginners, while the Composition API (Vue 3) is powerful for large apps. Excellent documentation.",
           resources: [
@@ -459,6 +1281,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "03",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_angular", number: "03", title: "Angular",
           description: "Angular is a full-featured, opinionated framework by Google. Built with TypeScript, it includes dependency injection, RxJS, forms, routing, and more out of the box. Popular in enterprise.",
           resources: [
@@ -467,6 +1291,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "04",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_svelte", number: "04", title: "Svelte",
           description: "Svelte is a radical new approach — it compiles your components to vanilla JS at build time, so there's no virtual DOM. The result is tiny, fast apps with very little boilerplate.",
           resources: [
@@ -476,6 +1302,8 @@ const frontendRoadmap = {
           ],
         },
         {
+          number: "05",
+          description: "Explore the core concepts and implementation details of this topic.",
           id: "fe_solid", number: "05", title: "SolidJS",
           description: "SolidJS offers React-like syntax but with true reactivity — no virtual DOM, fine-grained updates, and incredible performance. A great choice for performance-critical UIs.",
           resources: [
@@ -497,6 +1325,7 @@ export const ALL_ROADMAPS = [
   { id: "devops", title: "DevOps Engineer", subtitle: "CI/CD, Docker, Kubernetes and cloud", icon: "infinite-outline", color: ["#10b981", "#06b6d4"], category: "role", modules: [] },
   { id: "ai_engineer", title: "AI Engineer", subtitle: "Machine learning, LLMs and AI systems", icon: "hardware-chip-outline", color: ["#8b5cf6", "#ec4899"], category: "role", modules: [] },
   pythonRoadmap,
+  REACT_ROADMAP,
   { id: "react_native", title: "React Native Developer", subtitle: "Build cross-platform mobile apps", icon: "phone-portrait-outline", color: ["#06b6d4", "#8b5cf6"], category: "skill", modules: [] },
   { id: "sql", title: "SQL & Databases", subtitle: "Master relational databases and SQL", icon: "grid-outline", color: ["#f59e0b", "#ef4444"], category: "skill", modules: [] },
   { id: "javascript", title: "JavaScript", subtitle: "The complete JavaScript developer path", icon: "logo-javascript", color: ["#f59e0b", "#fbbf24"], category: "skill", modules: [] },
