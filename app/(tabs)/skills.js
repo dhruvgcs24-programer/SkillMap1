@@ -1,11 +1,11 @@
 // ============================================================
-// skills.js — Multi-Roadmap AI Skills Tab
+// skills.js — Multi-Roadmap AI Skills Tab with Cloud Sync
 // ============================================================
-// States:
-//   "dashboard" → My Roadmaps list (shows if ≥1 roadmap saved)
-//   "form"      → RoadmapForm (first time OR after pressing +)
-//   "loading"   → Animated loading screen during generation
-//   "result"    → GeneratedRoadmap viewer for a selected roadmap
+// Logic:
+// 1. Initial Load: Load from AsyncStorage (Local) for speed.
+// 2. Background Sync: Fetch from Supabase (Cloud) to update/sync.
+// 3. Generation: Save to Supabase -> then update Local.
+// 4. Deletion: Delete from Supabase -> then update Local.
 // ============================================================
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
@@ -18,6 +18,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -25,31 +26,29 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { supabase } from "../../src/services/supabase";
 import RoadmapForm from "../../components/ui/RoadmapForm";
 import GeneratedRoadmap from "../../components/ui/GeneratedRoadmap";
 
 const { width } = Dimensions.get("window");
-
 const STORAGE_KEY = "skillmap_ai_roadmaps";
 
-// ─── Persistence helpers ───────────────────────────────────────────────────────
-async function loadRoadmaps() {
+// ─── Phase colour dots ─────────────────────────────────────────────────────────
+const PHASE_COLORS = ["#6C63FF", "#FF6584", "#43D9AD"];
+
+// ─── Persistence Helpers ───────────────────────────────────────────────────────
+async function getLocalRoadmaps() {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
+  } catch { return []; }
 }
 
-async function saveRoadmaps(roadmaps) {
+async function setLocalRoadmaps(roadmaps) {
   try {
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(roadmaps));
   } catch {}
 }
-
-// ─── Phase colour dots ─────────────────────────────────────────────────────────
-const PHASE_COLORS = ["#6C63FF", "#FF6584", "#43D9AD"];
 
 // ─── Loading Screen ────────────────────────────────────────────────────────────
 function LoadingScreen({ topic }) {
@@ -137,7 +136,6 @@ function RoadmapCard({ roadmap, index, onPress, onDelete }) {
 
   const totalWeeks   = roadmap.totalWeeks || 0;
   const totalPhases  = roadmap.phases?.length || 0;
-  const totalTopics  = roadmap.phases?.reduce((a, p) => a + (p.topics?.length || 0), 0) || 0;
   const createdDate  = roadmap.createdAt
     ? new Date(roadmap.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
     : "";
@@ -156,16 +154,12 @@ function RoadmapCard({ roadmap, index, onPress, onDelete }) {
         onPress={() => onPress(roadmap)}
         activeOpacity={0.85}
       >
-        {/* Left accent bar */}
         <LinearGradient colors={gradColors} style={styles.cardAccentBar} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} />
-
         <View style={styles.cardBody}>
-          {/* Header row */}
           <View style={styles.cardHeaderRow}>
             <LinearGradient colors={gradColors} style={styles.cardIconBox} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
               <Ionicons name="git-branch-outline" size={20} color="#fff" />
             </LinearGradient>
-
             <View style={{ flex: 1, marginLeft: 12 }}>
               <Text style={styles.cardTitle} numberOfLines={1}>{roadmap.title}</Text>
               <View style={styles.cardMeta}>
@@ -175,17 +169,11 @@ function RoadmapCard({ roadmap, index, onPress, onDelete }) {
                 <Text style={styles.cardDate}>{createdDate}</Text>
               </View>
             </View>
-
-            <TouchableOpacity
-              onPress={() => onDelete(roadmap.id)}
-              style={styles.deleteBtn}
-              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-            >
+            <TouchableOpacity onPress={() => onDelete(roadmap.id)} style={styles.deleteBtn}>
               <Ionicons name="trash-outline" size={16} color="#3a3a5a" />
             </TouchableOpacity>
           </View>
 
-          {/* Stats row */}
           <View style={styles.statsRow}>
             {[
               { icon: "time-outline",    value: roadmap.duration,         label: "Duration" },
@@ -200,19 +188,7 @@ function RoadmapCard({ roadmap, index, onPress, onDelete }) {
               </View>
             ))}
           </View>
-
-          {/* Phase dots */}
-          <View style={styles.phaseDotsRow}>
-            {roadmap.phases?.map((phase, i) => (
-              <View key={phase.id} style={styles.phaseDotWrap}>
-                <View style={[styles.phaseDot, { backgroundColor: PHASE_COLORS[i] || "#555" }]} />
-                <Text style={styles.phaseDotLabel} numberOfLines={1}>{phase.name?.replace(/Phase \d+ – /, "")}</Text>
-              </View>
-            ))}
-          </View>
         </View>
-
-        {/* Arrow */}
         <View style={styles.cardArrow}>
           <Ionicons name="chevron-forward" size={18} color="#3a3a5a" />
         </View>
@@ -222,26 +198,24 @@ function RoadmapCard({ roadmap, index, onPress, onDelete }) {
 }
 
 // ─── Dashboard ─────────────────────────────────────────────────────────────────
-function Dashboard({ roadmaps, onSelectRoadmap, onDelete, onCreateNew }) {
+function Dashboard({ roadmaps, onSelectRoadmap, onDelete, onCreateNew, syncing }) {
   const totalXP = roadmaps.reduce((acc, r) => acc + (r.xpTotal || 0), 0);
 
   return (
     <LinearGradient colors={["#06060f", "#0d0d1f", "#06060f"]} style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView
-          contentContainerStyle={styles.dashScroll}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Header */}
+        <ScrollView contentContainerStyle={styles.dashScroll} showsVerticalScrollIndicator={false}>
           <View style={styles.dashHeader}>
-            <Text style={styles.dashEyebrow}>AI GENERATOR</Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+              <Text style={styles.dashEyebrow}>AI GENERATOR</Text>
+              {syncing && <ActivityIndicator size="small" color="#6C63FF" />}
+            </View>
             <Text style={styles.dashTitle}>My Roadmaps</Text>
             <Text style={styles.dashSub}>
               {roadmaps.length} custom learning {roadmaps.length === 1 ? "path" : "paths"} · {totalXP.toLocaleString()} total XP
             </Text>
           </View>
 
-          {/* Cards */}
           <View style={styles.cardsWrap}>
             {roadmaps.map((roadmap, index) => (
               <RoadmapCard
@@ -253,12 +227,9 @@ function Dashboard({ roadmaps, onSelectRoadmap, onDelete, onCreateNew }) {
               />
             ))}
           </View>
-
-          {/* Bottom spacer for FAB */}
           <View style={{ height: 100 }} />
         </ScrollView>
 
-        {/* FAB */}
         <TouchableOpacity style={styles.fab} onPress={onCreateNew} activeOpacity={0.85}>
           <LinearGradient colors={["#6C63FF", "#9B5DE5"]} style={styles.fabGrad} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
             <Ionicons name="add" size={28} color="#fff" />
@@ -282,6 +253,8 @@ function RoadmapFormWrapper({ onSubmitStart, onRoadmapGenerated, onBack, showBac
       onRoadmapGenerated(result);
     } catch (e) {
       console.error("Roadmap generation failed:", e);
+      Alert.alert("Error", "Failed to generate roadmap. Please check your API key.");
+      onBack();
     } finally {
       setLoading(false);
     }
@@ -308,20 +281,76 @@ function RoadmapFormWrapper({ onSubmitStart, onRoadmapGenerated, onBack, showBac
 
 // ─── Main Skills Tab ───────────────────────────────────────────────────────────
 export default function SkillsScreen() {
-  // "init" | "dashboard" | "form" | "loading" | "result"
   const [screen, setScreen]         = useState("init");
   const [roadmaps, setRoadmaps]     = useState([]);
   const [activeRoadmap, setActive]  = useState(null);
   const [formTopic, setFormTopic]   = useState("");
+  const [syncing, setSyncing]       = useState(false);
 
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
-  // Load persisted roadmaps on mount
+  // Sync logic: Map database columns (snake_case) to state (camelCase)
+  const mapFromDb = (dbItem) => ({
+    id: dbItem.id,
+    title: dbItem.title,
+    topic: dbItem.topic,
+    duration: dbItem.duration,
+    level: dbItem.level,
+    goal: dbItem.goal,
+    totalWeeks: dbItem.total_weeks,
+    xpTotal: dbItem.xp_total,
+    phases: dbItem.phases,
+    createdAt: dbItem.created_at,
+  });
+
+  const mapToDb = (roadmap, userId) => ({
+    user_id: userId,
+    title: roadmap.title,
+    topic: roadmap.topic,
+    duration: roadmap.duration,
+    level: roadmap.level,
+    goal: roadmap.goal,
+    total_weeks: roadmap.totalWeeks,
+    xp_total: roadmap.xpTotal,
+    phases: roadmap.phases,
+  });
+
+  const loadAndSync = async () => {
+    // 1. Load local for instant UI
+    const local = await getLocalRoadmaps();
+    setRoadmaps(local);
+    if (local.length > 0) setScreen("dashboard");
+    else setScreen("form");
+
+    // 2. Sync from Supabase in background
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      setSyncing(true);
+      const { data, error } = await supabase
+        .from("ai_roadmaps")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      if (data) {
+        const synced = data.map(mapFromDb);
+        setRoadmaps(synced);
+        setLocalRoadmaps(synced);
+        if (synced.length > 0) setScreen("dashboard");
+        else setScreen("form");
+      }
+    } catch (err) {
+      console.warn("Sync failed:", err);
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   useEffect(() => {
-    loadRoadmaps().then((saved) => {
-      setRoadmaps(saved);
-      setScreen(saved.length === 0 ? "form" : "dashboard");
-    });
+    loadAndSync();
   }, []);
 
   const transitionTo = useCallback((nextScreen, callback) => {
@@ -332,61 +361,71 @@ export default function SkillsScreen() {
     });
   }, [fadeAnim]);
 
-  // When generation completes → save + go to result
-  const handleRoadmapGenerated = useCallback((generated) => {
-    const newRoadmap = {
-      ...generated,
-      id: `roadmap_${Date.now()}`,
-      createdAt: new Date().toISOString(),
-    };
-    transitionTo("result", () => {
-      setRoadmaps((prev) => {
-        const updated = [newRoadmap, ...prev];
-        saveRoadmaps(updated);
-        return updated;
-      });
-      setActive(newRoadmap);
-    });
-  }, [transitionTo]);
-
-  // Form submit start → show loading
-  const handleFormSubmitStart = useCallback((topic) => {
-    setFormTopic(topic);
+  const handleRoadmapGenerated = useCallback(async (generated) => {
+    setFormTopic(generated.topic);
     transitionTo("loading");
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        Alert.alert("Auth Error", "Please sign in to save roadmaps.");
+        transitionTo("form");
+        return;
+      }
+
+      // 1. Save to Supabase
+      const { data, error } = await supabase
+        .from("ai_roadmaps")
+        .insert([mapToDb(generated, user.id)])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      const newRoadmap = mapFromDb(data);
+
+      // 2. Update State & Local
+      transitionTo("result", () => {
+        setRoadmaps((prev) => {
+          const updated = [newRoadmap, ...prev];
+          setLocalRoadmaps(updated);
+          return updated;
+        });
+        setActive(newRoadmap);
+      });
+    } catch (err) {
+      console.error("Save error:", err);
+      Alert.alert("Save Error", "Generated but could not save to cloud.");
+      // Fallback: save locally only
+      const localOnly = { ...generated, id: `local_${Date.now()}`, createdAt: new Date().toISOString() };
+      transitionTo("result", () => {
+        setRoadmaps(p => [localOnly, ...p]);
+        setActive(localOnly);
+      });
+    }
   }, [transitionTo]);
 
-  // Delete a roadmap
   const handleDelete = useCallback((id) => {
-    Alert.alert(
-      "Delete Roadmap",
-      "Are you sure you want to remove this roadmap?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            setRoadmaps((prev) => {
-              const updated = prev.filter((r) => r.id !== id);
-              saveRoadmaps(updated);
-              if (updated.length === 0) transitionTo("form");
-              return updated;
-            });
-          },
+    Alert.alert("Delete Roadmap", "Remove this roadmap from your library?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: async () => {
+          // Optimistic local delete
+          const updated = roadmaps.filter((r) => r.id !== id);
+          setRoadmaps(updated);
+          setLocalRoadmaps(updated);
+          if (updated.length === 0) transitionTo("form");
+
+          // Cloud delete
+          if (typeof id === 'string' && id.includes('-')) { // likely UUID
+             await supabase.from("ai_roadmaps").delete().eq("id", id);
+          }
         },
-      ]
-    );
-  }, [transitionTo]);
-
-  // Select a roadmap from dashboard
-  const handleSelectRoadmap = useCallback((roadmap) => {
-    transitionTo("result", () => setActive(roadmap));
-  }, [transitionTo]);
-
-  // Go back to dashboard (or form if no roadmaps)
-  const handleBack = useCallback(() => {
-    transitionTo(roadmaps.length > 0 ? "dashboard" : "form");
-  }, [roadmaps.length, transitionTo]);
+      },
+    ]);
+  }, [roadmaps, transitionTo]);
 
   if (screen === "init") return null;
 
@@ -394,48 +433,43 @@ export default function SkillsScreen() {
     <View style={{ flex: 1, backgroundColor: "#0D0D1A" }}>
       <StatusBar style="light" />
       <Animated.View style={[{ flex: 1 }, { opacity: fadeAnim }]}>
-
         {screen === "dashboard" && (
           <Dashboard
             roadmaps={roadmaps}
-            onSelectRoadmap={handleSelectRoadmap}
+            onSelectRoadmap={(r) => transitionTo("result", () => setActive(r))}
             onDelete={handleDelete}
             onCreateNew={() => transitionTo("form")}
+            syncing={syncing}
           />
         )}
 
         {screen === "form" && (
           <RoadmapFormWrapper
-            onSubmitStart={handleFormSubmitStart}
+            onSubmitStart={setFormTopic}
             onRoadmapGenerated={handleRoadmapGenerated}
             onBack={() => transitionTo("dashboard")}
             showBack={roadmaps.length > 0}
           />
         )}
 
-        {screen === "loading" && (
-          <LoadingScreen topic={formTopic} />
-        )}
+        {screen === "loading" && <LoadingScreen topic={formTopic} />}
 
         {screen === "result" && activeRoadmap && (
           <View style={{ flex: 1, backgroundColor: "#0D0D1A" }}>
             <GeneratedRoadmap
               roadmap={activeRoadmap}
               onRegenerate={() => transitionTo("form")}
-              onBack={handleBack}
+              onBack={() => transitionTo(roadmaps.length > 0 ? "dashboard" : "form")}
               backLabel={roadmaps.length > 1 ? "My Roadmaps" : "Back"}
             />
           </View>
         )}
-
       </Animated.View>
     </View>
   );
 }
 
-// ─── Styles ────────────────────────────────────────────────────────────────────
 const styles = StyleSheet.create({
-  // Loading
   loadingContainer:  { flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 40 },
   glowCircle:        { position: "absolute", width: 320, height: 320, borderRadius: 160, alignSelf: "center", top: "25%", overflow: "hidden" },
   loadingIconWrapper: { marginBottom: 28, shadowColor: "#6C63FF", shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.8, shadowRadius: 24, elevation: 10 },
@@ -446,51 +480,33 @@ const styles = StyleSheet.create({
   dotsRow:           { flexDirection: "row", gap: 10, alignItems: "center" },
   dot:               { width: 10, height: 10, borderRadius: 5, backgroundColor: "#6C63FF" },
 
-  // Dashboard
   dashScroll:        { paddingHorizontal: 20, paddingTop: 16 },
   dashHeader:        { marginBottom: 28 },
   dashEyebrow:       { fontSize: 10, fontWeight: "800", letterSpacing: 3, color: "#6C63FF", marginBottom: 6 },
   dashTitle:         { fontSize: 30, fontWeight: "800", color: "#f0f0ff", letterSpacing: -0.5, marginBottom: 6 },
-  dashSub:           { fontSize: 13, color: "#55557a" },
+  dashSub:           { fontSize: 13, color: "#8888AA" },
 
-  // Cards
   cardsWrap:         { gap: 14 },
-  roadmapCard: {
-    flexDirection: "row",
-    borderRadius: 20,
-    backgroundColor: "#0e0e26",
-    borderWidth: 1,
-    borderColor: "rgba(108,99,255,0.2)",
-    overflow: "hidden",
-  },
+  roadmapCard: { flexDirection: "row", borderRadius: 20, backgroundColor: "#0e0e26", borderWidth: 1, borderColor: "rgba(108,99,255,0.2)", overflow: "hidden" },
   cardAccentBar:     { width: 4 },
   cardBody:          { flex: 1, padding: 16 },
   cardArrow:         { justifyContent: "center", paddingRight: 14 },
-
   cardHeaderRow:     { flexDirection: "row", alignItems: "center", marginBottom: 14 },
   cardIconBox:       { width: 44, height: 44, borderRadius: 13, alignItems: "center", justifyContent: "center", flexShrink: 0 },
   cardTitle:         { fontSize: 15, fontWeight: "800", color: "#f0f0ff", marginBottom: 5 },
   cardMeta:          { flexDirection: "row", alignItems: "center", gap: 10 },
   levelBadge:        { borderWidth: 1, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
   levelText:         { fontSize: 10, fontWeight: "700" },
-  cardDate:          { fontSize: 11, color: "#3a3a5a" },
+  cardDate:          { fontSize: 11, color: "#777799" },
   deleteBtn:         { padding: 6 },
-
-  statsRow:          { flexDirection: "row", justifyContent: "space-between", marginBottom: 14 },
+  statsRow:          { flexDirection: "row", justifyContent: "space-between" },
   statItem:          { alignItems: "center", flex: 1 },
   statValue:         { fontSize: 11, fontWeight: "700", color: "#c0c0e0", marginTop: 3, marginBottom: 1 },
-  statLabel:         { fontSize: 9, color: "#44446a" },
+  statLabel:         { fontSize: 9, color: "#8888AA" },
 
-  phaseDotsRow:      { flexDirection: "row", gap: 12, flexWrap: "wrap" },
-  phaseDotWrap:      { flexDirection: "row", alignItems: "center", gap: 5 },
-  phaseDot:          { width: 8, height: 8, borderRadius: 4 },
-  phaseDotLabel:     { fontSize: 10, color: "#44446a", maxWidth: 80 },
-
-  // FAB
   fab:               { position: "absolute", bottom: 28, right: 24, borderRadius: 32, overflow: "hidden", shadowColor: "#6C63FF", shadowOpacity: 0.6, shadowRadius: 16, shadowOffset: { width: 0, height: 4 }, elevation: 12 },
   fabGrad:           { width: 60, height: 60, alignItems: "center", justifyContent: "center" },
 
-  // Back bar
   backBarSafe:       { backgroundColor: "transparent" },
   backBar:           { flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 20, paddingVertical: 12, alignSelf: "flex-start", backgroundColor: "rgba(108,99,255,0.1)", marginHorizontal: 16, marginTop: 8, borderRadius: 20, borderWidth: 1, borderColor: "rgba(168,85,247,0.2)" },
   backBarLabel:      { color: "#a855f7", fontSize: 13, fontWeight: "600" },

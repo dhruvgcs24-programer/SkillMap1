@@ -27,7 +27,7 @@ const T = {
   gold:      "#f59e0b",
   text:      "#f0f0ff",
   textSub:   "#8888aa",
-  textMuted: "#44446a",
+  textMuted: "#8888aa",
   surface:   "rgba(255,255,255,0.03)",
   border:    "rgba(168,85,247,0.1)",
 };

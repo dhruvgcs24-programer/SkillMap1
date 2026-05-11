@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   statItem: { alignItems: "center" },
   statNum: { fontSize: 22, fontWeight: "800", color: "#f0f0ff", marginBottom: 2 },
-  statLabel: { fontSize: 11, color: "#55557a" },
+  statLabel: { fontSize: 11, color: "#8888aa" },
   statDivider: { width: 1, height: 32, backgroundColor: "rgba(168,85,247,0.2)" },
 
   // Section
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     alignItems: "center", justifyContent: "center",
   },
   sectionTitle: { fontSize: 17, fontWeight: "700", color: "#e0e0ff", marginBottom: 2 },
-  sectionSub: { fontSize: 11, color: "#44446a" },
+  sectionSub: { fontSize: 11, color: "#8888aa" },
 
   // Grid
   grid: { flexDirection: "row", flexWrap: "wrap", gap: 12 },
@@ -245,10 +245,10 @@ const styles = StyleSheet.create({
     shadowColor: "#000", shadowOpacity: 0.3, shadowRadius: 6, elevation: 4,
   },
   cardTitle: { fontSize: 14, fontWeight: "700", color: "#f0f0ff", marginBottom: 4, lineHeight: 18 },
-  cardSub: { fontSize: 11, color: "#44446a", lineHeight: 15, flex: 1, marginBottom: 12 },
+  cardSub: { fontSize: 11, color: "#8888aa", lineHeight: 15, flex: 1, marginBottom: 12 },
   cardFooter: { gap: 4 },
   cardStat: { flexDirection: "row", alignItems: "center", gap: 5 },
-  cardStatText: { fontSize: 11, color: "#44446a" },
+  cardStatText: { fontSize: 11, color: "#8888aa" },
 
   comingSoonBadge: {
     backgroundColor: "rgba(168,85,247,0.1)",
