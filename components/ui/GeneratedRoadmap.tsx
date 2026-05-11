@@ -84,6 +84,8 @@ interface RoadmapTask {
 interface GeneratedRoadmapProps {
   roadmap: Roadmap;
   onRegenerate: () => void;
+  onBack?: () => void;
+  backLabel?: string;
 }
 
 // -------------------------------------------------------------------
@@ -488,7 +490,7 @@ function ChecklistView({ roadmap }: { roadmap: Roadmap }) {
 // -------------------------------------------------------------------
 // MAIN COMPONENT
 // -------------------------------------------------------------------
-export default function GeneratedRoadmap({ roadmap, onRegenerate }: GeneratedRoadmapProps) {
+export default function GeneratedRoadmap({ roadmap, onRegenerate, onBack, backLabel = "Back" }: GeneratedRoadmapProps) {
   const [activeTab, setActiveTab] = useState("phases");
 
   return (
@@ -500,6 +502,14 @@ export default function GeneratedRoadmap({ roadmap, onRegenerate }: GeneratedRoa
 
       {/* Header */}
       <View style={styles.header}>
+        {/* Back button row */}
+        {onBack && (
+          <TouchableOpacity style={styles.backBtn} onPress={onBack} activeOpacity={0.8}>
+            <Ionicons name="arrow-back" size={16} color="#a855f7" />
+            <Text style={styles.backBtnLabel}>{backLabel}</Text>
+          </TouchableOpacity>
+        )}
+
         {/* Roadmap title + meta */}
         <View style={styles.headerTop}>
           <View style={{ flex: 1 }}>
@@ -582,6 +592,24 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#2A2A4A",
     backgroundColor: "#0D0D1Aee",
+  },
+  backBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    alignSelf: "flex-start",
+    backgroundColor: "rgba(168,85,247,0.1)",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "rgba(168,85,247,0.2)",
+    marginBottom: 14,
+  },
+  backBtnLabel: {
+    color: "#a855f7",
+    fontSize: 13,
+    fontWeight: "600",
   },
   headerTop: {
     flexDirection: "row",

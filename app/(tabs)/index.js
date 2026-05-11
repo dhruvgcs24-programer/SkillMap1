@@ -61,7 +61,7 @@ function RoadmapCard({ roadmap, pct, done, total }) {
     <TouchableOpacity
       style={s.roadmapCard}
       activeOpacity={0.8}
-      onPress={() => router.push("/(tabs)/roadmap")}
+      onPress={() => router.push({ pathname: "/(tabs)/roadmap", params: { openId: roadmap.id } })}
     >
       <LinearGradient colors={cfg.colors} style={s.roadmapCardInner}>
         <LinearGradient colors={roadmap.color} style={s.roadmapIcon}>
@@ -145,7 +145,7 @@ export default function HomeScreen() {
       }
 
       setStats({ xp: totalXp, streak, mastery: totalAll > 0 ? Math.round((doneAll/totalAll)*100) : 0 });
-      setActiveRoadmaps(active.slice(0, 3));
+      setActiveRoadmaps(active);
     } catch (e) {
       console.error("Home load error:", e);
     } finally {
@@ -262,11 +262,11 @@ export default function HomeScreen() {
 
           {/* ── EXPLORE SECTION ───────────────────────────────── */}
           <Text style={[s.eyebrow, { marginTop: 8, marginBottom: 12 }]}>FEATURED PATHS</Text>
-          {ALL_ROADMAPS.filter(r => r.modules?.length > 0).slice(0, 4).map(r => (
+          {ALL_ROADMAPS.filter(r => r.modules?.length > 0).map(r => (
             <TouchableOpacity
               key={r.id}
               style={s.featuredCard}
-              onPress={() => router.push("/(tabs)/roadmap")}
+              onPress={() => router.push({ pathname: "/(tabs)/roadmap", params: { openId: r.id } })}
               activeOpacity={0.8}
             >
               <LinearGradient colors={r.color} style={s.featuredIcon}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View, Text, StyleSheet, ScrollView,
   TouchableOpacity, Dimensions,
@@ -6,8 +6,9 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useLocalSearchParams, useFocusEffect } from "expo-router";
 
-import { ROLE_ROADMAPS, SKILL_ROADMAPS } from "../../src/data/roadmapData";
+import { ROLE_ROADMAPS, SKILL_ROADMAPS, getRoadmapById } from "../../src/data/roadmapData";
 import RoadmapScreen from "../../src/components/RoadmapScreen";
 
 const { width } = Dimensions.get("window");
@@ -83,6 +84,19 @@ function SectionHeader({ title, subtitle, icon }) {
 // ─── MAIN EXPLORE SCREEN ──────────────────────────────────────────────────────
 export default function RoadmapExploreScreen() {
   const [activeRoadmap, setActiveRoadmap] = useState(null);
+  const { openId } = useLocalSearchParams();
+
+  // Auto-open a specific roadmap when navigated from another tab
+  useFocusEffect(
+    useCallback(() => {
+      if (openId) {
+        const roadmap = getRoadmapById(openId);
+        if (roadmap && roadmap.modules?.length > 0) {
+          setActiveRoadmap(roadmap);
+        }
+      }
+    }, [openId])
+  );
 
   const handlePress = (roadmap) => {
     if (roadmap.modules.length === 0) return; // coming soon
