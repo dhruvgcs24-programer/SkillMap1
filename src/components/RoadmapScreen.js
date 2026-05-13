@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { supabase } from "../services/supabase";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.54;
@@ -50,18 +51,20 @@ const RESOURCE_CFG = {
 };
 
 // ─── STORAGE ──────────────────────────────────────────────────────────────────
-const storageKey = (id) => `skillmap_progress_${id}`;
+const storageKey = (userId, roadmapId) => `roadmap_progress_${userId}_${roadmapId}`;
 
-async function loadProgress(id) {
+async function loadProgress(userId, roadmapId) {
+  if (!userId) return {};
   try {
-    const raw = await AsyncStorage.getItem(storageKey(id));
+    const raw = await AsyncStorage.getItem(storageKey(userId, roadmapId));
     return raw ? JSON.parse(raw) : {};
   } catch { return {}; }
 }
 
-async function saveProgress(id, progress) {
+async function saveProgress(userId, roadmapId, progress) {
+  if (!userId) return;
   try {
-    await AsyncStorage.setItem(storageKey(id), JSON.stringify(progress));
+    await AsyncStorage.setItem(storageKey(userId, roadmapId), JSON.stringify(progress));
   } catch {}
 }
 
@@ -350,33 +353,50 @@ export default function RoadmapScreen({ roadmap, onBack }) {
   const [selectedStatus, setSelectedStatus] = useState("active");
   const [progress, setProgress] = useState({});
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    loadProgress(roadmap.id).then((p) => {
+    let cancelled = false;
+    setLoading(true);
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (cancelled) return;
+      const uid = session?.user?.id ?? null;
+      setUserId(uid);
+      if (!uid) {
+        setProgress({});
+        setLoading(false);
+        return;
+      }
+      const p = await loadProgress(uid, roadmap.id);
+      if (cancelled) return;
       setProgress(p);
       setLoading(false);
-    });
+    })();
+    return () => { cancelled = true; };
   }, [roadmap.id]);
 
   // Toggle single subtopic
   const handleToggle = useCallback(async (topicId) => {
+    if (!userId) return;
     setProgress((prev) => {
       const next = { ...prev, [topicId]: !prev[topicId] };
-      saveProgress(roadmap.id, next);
+      saveProgress(userId, roadmap.id, next);
       return next;
     });
-  }, [roadmap.id]);
+  }, [userId, roadmap.id]);
 
   // Mark all subtopics in currently open module
   const handleMarkAll = useCallback((markDone) => {
+    if (!userId) return;
     if (!selectedModule) return;
     setProgress((prev) => {
       const next = { ...prev };
       selectedModule.subTopics.forEach((t) => { next[t.id] = markDone; });
-      saveProgress(roadmap.id, next);
+      saveProgress(userId, roadmap.id, next);
       return next;
     });
-  }, [selectedModule, roadmap.id]);
+  }, [userId, selectedModule, roadmap.id]);
 
   const completedCount = (module) =>
     module.subTopics.filter((t) => progress[t.id]).length;

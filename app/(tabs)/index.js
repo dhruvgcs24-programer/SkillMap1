@@ -110,13 +110,14 @@ export default function HomeScreen() {
       const day = new Date().getDate();
       setTip(DAILY_TIPS[day % DAILY_TIPS.length]);
 
-      // Progress across roadmaps
+      // Progress across roadmaps (AsyncStorage keys scoped per user)
+      const progressUserId = session.user.id;
       let totalXp = 0, doneAll = 0, totalAll = 0;
       const active = [];
 
       for (const roadmap of ALL_ROADMAPS) {
         if (!roadmap.modules?.length) continue;
-        const raw = await AsyncStorage.getItem(`skillmap_progress_${roadmap.id}`);
+        const raw = await AsyncStorage.getItem(`roadmap_progress_${progressUserId}_${roadmap.id}`);
         const prog = raw ? JSON.parse(raw) : {};
 
         let done = 0, total = 0;

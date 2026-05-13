@@ -132,27 +132,32 @@ export default function Profile() {
         setEditLast(prof?.last_name || "");
       }
 
-      // Progress — RoadmapScreen stores { [subtopicId]: true }
+      // Progress — RoadmapScreen stores { [subtopicId]: true } under user-scoped keys
+      const { data: { session: progressSession } } = await supabase.auth.getSession();
+      const progressUserId = progressSession?.user?.id ?? null;
+
       let totalXp = 0, doneSubs = 0, totalSubs = 0, completedMods = 0;
       let earnedMilestones = [];
 
-      for (const roadmap of ALL_ROADMAPS) {
-        if (!roadmap.modules?.length) continue;
-        const raw = await AsyncStorage.getItem(`skillmap_progress_${roadmap.id}`);
-        const prog = raw ? JSON.parse(raw) : {};
+      if (progressUserId) {
+        for (const roadmap of ALL_ROADMAPS) {
+          if (!roadmap.modules?.length) continue;
+          const raw = await AsyncStorage.getItem(`roadmap_progress_${progressUserId}_${roadmap.id}`);
+          const prog = raw ? JSON.parse(raw) : {};
 
-        for (const mod of roadmap.modules) {
-          const subs = mod.subTopics || [];
-          if (!subs.length) continue;
-          totalSubs += subs.length;
-          const done = subs.filter(st => prog[st.id] === true).length;
-          doneSubs += done;
-          if (done === subs.length) {
-            totalXp += mod.xp || 0;
-            completedMods++;
-            earnedMilestones.push({ id: mod.id, title: mod.title, icon: mod.icon || "star", color: roadmap.color || ["#a855f7", "#7c3aed"] });
-          } else {
-            totalXp += done * 10;
+          for (const mod of roadmap.modules) {
+            const subs = mod.subTopics || [];
+            if (!subs.length) continue;
+            totalSubs += subs.length;
+            const done = subs.filter(st => prog[st.id] === true).length;
+            doneSubs += done;
+            if (done === subs.length) {
+              totalXp += mod.xp || 0;
+              completedMods++;
+              earnedMilestones.push({ id: mod.id, title: mod.title, icon: mod.icon || "star", color: roadmap.color || ["#a855f7", "#7c3aed"] });
+            } else {
+              totalXp += done * 10;
+            }
           }
         }
       }
