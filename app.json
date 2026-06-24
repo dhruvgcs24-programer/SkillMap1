@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dhyansirigerics24.SkillMap"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +20,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.dhyansirigerics24.SkillMap"
     },
     "web": {
       "output": "static",
@@ -45,6 +47,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d40adadb-5ef5-4d95-9255-162ef2530480"
+      }
+    },
+    "owner": "dhyansirigerics24"
   }
 }

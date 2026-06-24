@@ -36,7 +36,7 @@ export default function LoginScreen() {
 
 const signInWithGoogle = async () => {
   const redirectTo =
-    "https://auth.expo.io/@dhruv2020/SkillMap";
+    "https://auth.expo.io/@dhyansirigerics24/SkillMap";
 
   const { data, error } =
     await supabase.auth.signInWithOAuth({

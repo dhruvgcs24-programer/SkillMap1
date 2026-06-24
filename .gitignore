@@ -5,6 +5,7 @@ node_modules/
 
 # Expo
 .expo/
+.expo-shared/
 dist/
 web-build/
 expo-env.d.ts
@@ -17,6 +18,7 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+*.keystore
 
 # Metro
 .metro-health-check*
@@ -25,20 +27,46 @@ expo-env.d.ts
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+*.log
 
 # macOS
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# Windows
+Thumbs.db
+Desktop.ini
+
+# local env files (secrets)
 .env
+.env.*
+!.env.example
 
 # typescript
 *.tsbuildinfo
 
 app-example
 
-# generated native folders
+# generated native folders (regenerate with `npx expo prebuild`)
 /ios
 /android
+
+# EAS
+.eas/
+
+# build artifacts
+*.apk
+*.aab
+*.ipa
+*.app/
+*.app
+
+# native build outputs (if native folders are ever committed)
+**/Pods/
+**/build/
+**/.gradle/
+**/local.properties
+*.hprof
+
+# test / coverage
+coverage/
